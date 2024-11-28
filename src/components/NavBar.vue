@@ -2,19 +2,12 @@
 import { ref } from "vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
-
-function toggleMenu() {
-  console.log("toggled");
-}
 </script>
 
 <template>
-  <div class="relative">
-    <div class="top-nav">
+  <div class="navbar">
+    <div class="top-items-nav">
       <div class="buttons-top-nav">
-        <button class="menu-button" @click="toggleMenu">
-          <MenuIcon />
-        </button>
         <div>
           <img
             src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
@@ -28,13 +21,12 @@ function toggleMenu() {
 </template>
 
 <style>
-.relative {
-  position: relative;
+.navbar {
+  display: flex;
+  flex-direction: row;
 }
-.top-nav {
+.top-items-nav {
   width: 100%;
-  height: 60px;
-  position: fixed;
   background-color: white;
   display: flex;
   align-items: center;
@@ -57,11 +49,11 @@ function toggleMenu() {
 
 .search-bar {
   padding: 5px;
-  width: 250px; /* Increased width */
+  width: 250px;
   height: 100%;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 14px;
-  margin-left: 10px; /* Added margin for spacing */
+  margin-left: 10px;
 }
 </style>
