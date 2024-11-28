@@ -1,5 +1,6 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
+import draggable from "vuedraggable";
 import NavBar from "./components/NavBar.vue";
 import NoteCard from "./components/NoteCard.vue";
 import AddNoteCard from "./components/AddNoteCard.vue";
@@ -10,12 +11,7 @@ const notes = ref([
   { id: 2, title: "second note", content: "asd;lfkj;" },
 ]);
 
-interface Note {
-  id: number;
-  title: string;
-  content: string;
-}
-function handleAddNote(newNote: Note) {
+function handleAddNote(newNote) {
   console.log("trying to get add");
   notes.value.push(newNote);
 }
@@ -27,9 +23,11 @@ function handleAddNote(newNote: Note) {
     <div class="main-area">
       <NavBar />
       <AddNoteCard @add-note="handleAddNote" />
-      <div class="notes">
-        <NoteCard v-for="note in notes" :key="note.id" :note="note" />
-      </div>
+      <draggable v-model="notes" handle=".drag-handle">
+        <template #item="{ element }">
+          <NoteCard :note="element" />
+        </template>
+      </draggable>
     </div>
   </div>
 </template>
@@ -57,7 +55,10 @@ body {
   margin-top: 15px;
   padding: 20px;
   display: flex;
-  flex-direction: wrap;
+  flex-wrap: wrap;
   gap: 20px;
+}
+.drag-handle {
+  cursor: grab;
 }
 </style>
