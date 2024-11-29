@@ -21,11 +21,9 @@ function handleAddNote(newNote) {
   <div class="app">
     <Sidebar class="sidebar" />
     <div class="main-area">
-      <NavBar />
+      <NavBar :notes="notes" />
 
       <div class="main-content-area">
-        <searchbar :notes="notes" />
-        <br /><br /><br /><br /><br /><br />
         <AddNoteCard @add-note="handleAddNote" />
         <draggable v-model="notes" handle=".drag-handle">
           <template #item="{ element }">
@@ -57,7 +55,7 @@ body {
   flex-direction: column;
 }
 .main-content-area {
-  margin-top: 200px;
+  margin-top: 20px;
 }
 .notes {
   margin-top: 15px;

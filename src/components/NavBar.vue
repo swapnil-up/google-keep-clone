@@ -3,6 +3,13 @@ import { ref } from "vue";
 import searchbar from "./searchbar.vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
+
+const props = defineProps({
+  notes: {
+    type: Array,
+    required: true,
+  },
+});
 </script>
 
 <template>
@@ -15,10 +22,9 @@ import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
           />
         </div>
         <div class="title">Keep</div>
-        
+        <searchbar :notes="notes"/>
       </div>
     </div>
-    <searchbar />
   </div>
 </template>
 
