@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar.vue";
 import NoteCard from "./components/NoteCard.vue";
 import AddNoteCard from "./components/AddNoteCard.vue";
 import Sidebar from "./components/Sidebar.vue";
-import EditModal from "./components/EditModal.vue";
+import searchbar from "./components/searchbar.vue";
 
 const notes = ref([
   { id: 1, title: "first note", content: "this is a test note" },
@@ -15,8 +15,6 @@ const notes = ref([
 function handleAddNote(newNote) {
   notes.value.push(newNote);
 }
-
-// const showModal = ref(false);
 </script>
 
 <template>
@@ -24,14 +22,17 @@ function handleAddNote(newNote) {
     <Sidebar class="sidebar" />
     <div class="main-area">
       <NavBar />
-      <AddNoteCard @add-note="handleAddNote" />
-      <draggable v-model="notes" handle=".drag-handle">
-        <template #item="{ element }">
-          <NoteCard :note="element" />
-        </template>
-      </draggable>
 
-
+      <div class="main-content-area">
+        <searchbar :notes="notes" />
+        <br /><br /><br /><br /><br /><br />
+        <AddNoteCard @add-note="handleAddNote" />
+        <draggable v-model="notes" handle=".drag-handle">
+          <template #item="{ element }">
+            <NoteCard :note="element" />
+          </template>
+        </draggable>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +55,9 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+.main-content-area {
+  margin-top: 200px;
 }
 .notes {
   margin-top: 15px;

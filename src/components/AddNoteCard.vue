@@ -14,7 +14,6 @@ function expand() {
 }
 
 function addNote() {
-  console.log("add triggered ");
   if (newNote.value.title.trim() != "") {
     console.log("sending");
     emit("add-note", {
@@ -27,7 +26,6 @@ function addNote() {
 }
 
 function reset() {
-  console.log("close triggered");
   newNote.value = { title: "", content: "" };
   isExpanded.value = false;
 }

@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import searchbar from "./searchbar.vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
 </script>
@@ -14,17 +15,18 @@ import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
           />
         </div>
         <div class="title">Keep</div>
-        <input type="text" class="search-bar" placeholder="Search" />
+        
       </div>
     </div>
+    <searchbar />
   </div>
 </template>
 
 <style>
-.navbar {
+/* .navbar {
   display: flex;
   flex-direction: row;
-}
+} */
 .top-items-nav {
   width: 100%;
   background-color: white;
