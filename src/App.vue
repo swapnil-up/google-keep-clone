@@ -8,8 +8,8 @@ import Sidebar from "./components/Sidebar.vue";
 import searchbar from "./components/searchbar.vue";
 
 const notes = ref([
-  { id: 1, title: "first note", content: "this is a test note" },
-  { id: 2, title: "second note", content: "asd;lfkj;" },
+  { id: 1, title: "first note", content: "this is a test note", tags:['work', 'first'] },
+  { id: 2, title: "second note", content: "asd;lfkj;",tags:['first'] },
 ]);
 
 function handleAddNote(newNote) {

@@ -38,7 +38,7 @@ function closeModal() {
         <br />
         <input v-model="note.content" />
         <br />
-        <button @click.stop="closeModal">Close Modal</button>
+        <button @click.stop="closeModal">Close</button>
       </div>
     </div>
   </div>
