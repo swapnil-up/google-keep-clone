@@ -16,7 +16,7 @@ function handleAddNote(newNote) {
   notes.value.push(newNote);
 }
 
-const showModal = ref(false);
+// const showModal = ref(false);
 </script>
 
 <template>
@@ -31,12 +31,6 @@ const showModal = ref(false);
         </template>
       </draggable>
 
-      <button id="show-modal" @click="showModal = true">Show Modal</button>
-
-      <EditModal
-        :isOpen="showModal"
-        @update:isOpen="showModal = $event"
-      ></EditModal>
 
     </div>
   </div>
@@ -70,5 +64,8 @@ body {
 }
 .drag-handle {
   cursor: grab;
+}
+.modal-div {
+  background-color: white;
 }
 </style>

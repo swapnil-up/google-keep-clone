@@ -1,19 +1,44 @@
 <script setup>
+import { ref, defineEmits } from "vue";
+import { watch } from "vue";
+
+const emit = defineEmits(["update:isOpen", "close"]);
+
 const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true,
   },
+  note: {
+    type: Object,
+    required: true,
+  },
 });
+
+watch(
+  () => props.isOpen,
+  (newVal) => {
+    console.log("isOpen prop updated to: ", newVal);
+  }
+);
+
+function closeModal() {
+  console.log("Closing modal...");
+  emit("update:isOpen", false);
+  emit("close");
+}
 </script>
 
 <template>
   <div id="modal-unique">
     <div v-if="isOpen" class="modal-overlay">
-      <div class="model-content">
-        <h1>New Modal</h1>
-        <p>This is a paraaaaaaaaaaaaa</p>
-        <button @click="$emit('update:isOpen', false)">close Modal</button>
+      <div class="modal-content">
+        <h1>Edit Note</h1>
+        <input v-model="note.title" />
+        <br />
+        <input v-model="note.content" />
+        <br />
+        <button @click.stop="closeModal">Close Modal</button>
       </div>
     </div>
   </div>
