@@ -13,13 +13,13 @@ const props = defineProps({
       <div class="model-content">
         <h1>New Modal</h1>
         <p>This is a paraaaaaaaaaaaaa</p>
+        <button @click="$emit('update:isOpen', false)">close Modal</button>
       </div>
     </div>
-    <button @click="$emit('update:isOpen', false)">close Modal</button>
   </div>
 </template>
 
-<style scoped>
+<style>
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -33,10 +33,11 @@ const props = defineProps({
 }
 
 .modal-content {
-  background-color: white;
+  color: aqua;
   padding: 20px;
   border-radius: 5px;
   max-width: 400px;
   text-align: center;
+  text-decoration-color: rebeccapurple;
 }
 </style>

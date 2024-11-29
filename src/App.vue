@@ -13,7 +13,6 @@ const notes = ref([
 ]);
 
 function handleAddNote(newNote) {
-  console.log("trying to get add");
   notes.value.push(newNote);
 }
 
@@ -33,12 +32,12 @@ const showModal = ref(false);
       </draggable>
 
       <button id="show-modal" @click="showModal = true">Show Modal</button>
-      
-        <EditModal
-          :isOpen="showModal"
-          @update:isOpen="showModal = $event"
-        ></EditModal>
-      
+
+      <EditModal
+        :isOpen="showModal"
+        @update:isOpen="showModal = $event"
+      ></EditModal>
+
     </div>
   </div>
 </template>
