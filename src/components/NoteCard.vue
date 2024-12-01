@@ -21,6 +21,10 @@ function editCard(note) {
 function closeModal() {
   showModal.value = false;
 }
+
+const removeTag = (note, index) => {
+  note.tags.splice(index, 1);
+};
 </script>
 <template>
   <div class="note-card" @click="editCard(note)">
@@ -28,8 +32,11 @@ function closeModal() {
       <h3>{{ note.title }}</h3>
       <p>{{ note.content }}</p>
       <div class="tags">
-        <span v-for="tag in note.tags" :key="tags" class="tag-button">
+        <span v-for="(tag, index) in note.tags" :key="index" class="tag-button">
           {{ tag }}
+          <button @click.stop="removeTag(note, index)" class="delete-tag">
+            x
+          </button>
         </span>
       </div>
 
@@ -56,10 +63,17 @@ function closeModal() {
   font-size: 18px;
 }
 .tag-button {
-  background-color: gray;
+  background-color: #6200ea;
   padding: 5px;
   margin: 5px;
   border-radius: 15px;
   font-size: medium;
+}
+.delete-tag {
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
 }
 </style>

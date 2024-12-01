@@ -29,10 +29,16 @@ function reset() {
   newNote.value = { title: "", content: "" };
   isExpanded.value = false;
 }
+
+const istagDialog = ref(false);
+function toggleTagDialog() {
+  istagDialog.value = !istagDialog.value;
+}
+function addTag() {}
 </script>
 
 <template>
-  <div class="addbar" @click="expand">
+  <div class="addbar" @click="expand" @click.stop="addNote">
     <div v-if="!isExpanded" class="collapsed">
       <input
         type="text"
@@ -47,10 +53,16 @@ function reset() {
         placeholder="Take a note... "
         v-model="newNote.content"
       ></textarea>
-    </div>
-    <div class="actions">
-      <button @click.stop="addNote">Add</button>
-      <button @click.stop="reset">Close</button>
+      <div name="add-tag">
+        <button name="add-tag-button" @click="toggleTagDialog()">+ tag</button>
+        <div v-if="istagDialog" class="tag-dialog">
+          <p>tag dialog here</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button @click.stop="addNote">Add</button>
+        <button @click.stop="reset">Close</button>
+      </div>
     </div>
   </div>
 </template>
