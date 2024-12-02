@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import searchbar from "./searchbar.vue";
-import MenuIcon from "vue-material-design-icons/Menu.vue";
-import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
+import user from "vue-material-design-icons/AccountCircle.vue";
+import grid from "vue-material-design-icons/DotsGrid.vue";
 
 const props = defineProps({
   notes: {
@@ -20,30 +20,42 @@ const props = defineProps({
       />
       <div class="title">Keep</div>
     </div>
-    <div>
-      <searchbar :items="notes" filterKey="title" />
-    </div>
+    <searchbar style="flex-grow: 4" :items="notes" filterKey="title" />
     <div class="right-side">
-      <img src="https://accounts.google.com/SignOutOptions?hl=en&continue" />
+      <div><user /></div>
+      <div><grid /></div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .navbar {
   padding: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: stretch;
+  gap: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .left-side {
   align-items: center;
   display: flex;
   flex-direction: row;
+  min-width: 120px;
+  gap: 10px;
 }
 .title {
+  font-family: "Product Sans";
+  color: #5f6368;
   font-size: large;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.img {
+  height: 40px;
 }
 .search-bar {
   padding: 5px;
@@ -51,6 +63,30 @@ const props = defineProps({
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 14px;
-  margin-left: 10px;
+  margin-left: 3%;
+  max-width: 60%;
+  overflow: hidden;
+}
+.right-side {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 100px;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .title,
+  .right-side {
+    display: none;
+  }
+  .navbar {
+    justify-content: flex-start;
+  }
+  .left-side {
+    min-width: 40px;
+  }
 }
 </style>

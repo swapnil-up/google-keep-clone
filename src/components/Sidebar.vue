@@ -1,6 +1,12 @@
 <script setup>
 import { ref } from "vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
+import labels from "vue-material-design-icons/LabelOutline.vue";
+import reminders from "vue-material-design-icons/BellOutline.vue";
+import notes from "vue-material-design-icons/LightbulbOutline.vue";
+import editLabel from "vue-material-design-icons/PencilOutline.vue";
+import archive from "vue-material-design-icons/ArchiveArrowDownOutline.vue";
+import bin from "vue-material-design-icons/TrashCanOutline.vue";
 
 var isToggled = ref(false);
 
@@ -20,11 +26,12 @@ function toggleMenu() {
     </button>
     <div v-if="isToggled" class="sidebar-items-container">
       <ul class="sidebar-items">
-        <li class="sidebar-item">Notes</li>
-        <li class="sidebar-item">Reminders</li>
-        <li class="sidebar-item">Edit Labels</li>
-        <li class="sidebar-item">Archive</li>
-        <li class="sidebar-item">Bin</li>
+        <li class="sidebar-item"><notes /> Notes</li>
+        <li class="sidebar-item"><reminders /> Reminders</li>
+        <li class="sidebar-item"><labels /> Labels</li>
+        <li class="sidebar-item"><editLabel /> Edit Labels</li>
+        <li class="sidebar-item"><archive /> Archive</li>
+        <li class="sidebar-item"><bin /> Bin</li>
       </ul>
     </div>
   </div>
@@ -32,31 +39,45 @@ function toggleMenu() {
 
 <style scoped>
 .sidebar {
-  width: 80px; 
+  width: 60px;
   height: 100vh;
-  background-color: grey;
+  background-color: rgb(255, 255, 255);
   color: white;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.2s ease-in-out;
   left: 0;
   top: 0;
 }
 
 .sidebar-expanded {
-  width: 250px; 
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 1%;
+  margin-left: 1%;
+}
+
+.sidebar-collapsed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
 }
 
 .menu-button {
   background: none;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 16px;
   cursor: pointer;
 }
 
 .menu-icon {
-  fill: white;
+  fill: black;
   width: 24px;
   height: 24px;
+  left: 0;
+  align-items: center;
 }
 
 .sidebar-items-container {
@@ -74,6 +95,9 @@ function toggleMenu() {
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: black;
+  display: flex;
+  align-content: space-around;
 }
 
 .sidebar-item:hover {

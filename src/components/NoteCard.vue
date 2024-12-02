@@ -57,6 +57,7 @@ const removeTag = (note, index) => {
   border: 1px solid grey;
   border-radius: 10px;
   padding: 10px;
+  max-width: 25ch;
 }
 .drag-handle {
   margin-bottom: 5px;
@@ -65,6 +66,7 @@ const removeTag = (note, index) => {
 .tag-button {
   background-color: #6200ea;
   padding: 5px;
+  margin-top: 15px;
   margin: 5px;
   border-radius: 15px;
   font-size: medium;

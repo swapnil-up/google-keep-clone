@@ -79,16 +79,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .app {
-  display: grid;
-  grid-template-columns: 1fr 10fr;
+  display: flex;
+  flex-direction: row;
 }
 .sidebar {
-  position: sticky;
+  position: fixed;
+  z-index: 10;
 }
 .main-content-area {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 60px;
 }
 .notes-area {
   display: flex;

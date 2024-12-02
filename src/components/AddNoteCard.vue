@@ -56,7 +56,7 @@ function addTag() {}
       ></textarea>
       <div name="add-tag">
         <button name="add-tag-button" @click="toggleTagDialog()">+ tag</button>
-        <div v-if="istagDialog" class="tag-dialog" >
+        <div v-if="istagDialog" class="tag-dialog">
           <li v-for="tag in newNote.tags" :key="tag">{{ tag }}</li>
         </div>
       </div>
@@ -90,11 +90,6 @@ function addTag() {}
   color: #333;
   outline: none;
   transition: all 0.3s ease;
-}
-
-.collapsed input:focus {
-  border-color: #6200ea;
-  box-shadow: 0 0 5px rgba(98, 0, 234, 0.5);
 }
 
 .expanded {

@@ -23,7 +23,6 @@ watch(
 );
 
 function closeModal() {
-  console.log("Closing modal...");
   emit("update:isOpen", false);
   emit("close");
 }
@@ -51,18 +50,62 @@ function closeModal() {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  color: aqua;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 400px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: #333;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modal-content h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
   text-align: center;
-  text-decoration-color: rebeccapurple;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.modal-content button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  align-self: flex-end;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
 }
 </style>
