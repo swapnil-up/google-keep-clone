@@ -11,30 +11,60 @@ function toggleMenu() {
 </script>
 
 <template>
-  <div class="sidebar">
+  <div
+    :class="{ 'sidebar-expanded': isToggled, 'sidebar-collapsed': !isToggled }"
+    class="sidebar"
+  >
     <button class="menu-button" @click="toggleMenu">
-      <div v-if="!isToggled" class="expanded">
-        <MenuIcon />
-        <ul class="sidebar-items">
-          <li>Notes</li>
-          <li>Reminders</li>
-          <li>Edit Labels</li>
-          <li>Archive</li>
-          <li>Bin</li>
-        </ul>
-      </div>
+      <MenuIcon class="menu-icon" />
     </button>
+    <div v-if="isToggled" class="sidebar-items-container">
+      <ul class="sidebar-items">
+        <li class="sidebar-item">Notes</li>
+        <li class="sidebar-item">Reminders</li>
+        <li class="sidebar-item">Edit Labels</li>
+        <li class="sidebar-item">Archive</li>
+        <li class="sidebar-item">Bin</li>
+      </ul>
+    </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .sidebar {
+  width: 80px; 
   height: 100vh;
-  width: 150px;
-  color: grey;
+  background-color: grey;
+  color: white;
+  transition: width 0.3s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar-expanded {
+  width: 250px; 
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 16px;
+  cursor: pointer;
   display: flex;
-  justify-content: flex-start;
-  align-content: flex-start;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-icon {
+  fill: white;
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-items-container {
+  padding: 16px;
 }
 
 .sidebar-items {
@@ -43,8 +73,14 @@ function toggleMenu() {
   margin: 0;
 }
 
-.sidebar-items li {
-  margin-bottom: 10px;
+.sidebar-item {
+  margin: 8px 0;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
+.sidebar-item:hover {
+  background-color: #3a3a3a;
+}
 </style>

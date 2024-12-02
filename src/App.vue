@@ -5,11 +5,15 @@ import NavBar from "./components/NavBar.vue";
 import NoteCard from "./components/NoteCard.vue";
 import AddNoteCard from "./components/AddNoteCard.vue";
 import Sidebar from "./components/Sidebar.vue";
-import searchbar from "./components/searchbar.vue";
 
 const notes = ref([
-  { id: 1, title: "first note", content: "this is a test note", tags:['work', 'first'] },
-  { id: 2, title: "second note", content: "asd;lfkj;",tags:['first'] },
+  {
+    id: 1,
+    title: "first note",
+    content: "this is a test note",
+    tags: ["work", "first"],
+  },
+  { id: 2, title: "second note", content: "asd;lfkj;", tags: ["first"] },
 ]);
 
 function handleAddNote(newNote) {

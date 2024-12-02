@@ -22,7 +22,7 @@ const props = defineProps({
           />
         </div>
         <div class="title">Keep</div>
-        <searchbar :notes="notes"/>
+        <searchbar :items="notes" filterKey="title" />
       </div>
     </div>
   </div>

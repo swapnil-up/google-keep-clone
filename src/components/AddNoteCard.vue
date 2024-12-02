@@ -7,6 +7,7 @@ const isExpanded = ref(false);
 const newNote = ref({
   title: "",
   content: "",
+  tags: [],
 });
 
 function expand() {
@@ -55,8 +56,8 @@ function addTag() {}
       ></textarea>
       <div name="add-tag">
         <button name="add-tag-button" @click="toggleTagDialog()">+ tag</button>
-        <div v-if="istagDialog" class="tag-dialog">
-          <p>tag dialog here</p>
+        <div v-if="istagDialog" class="tag-dialog" >
+          <li v-for="tag in newNote.tags" :key="tag">{{ tag }}</li>
         </div>
       </div>
       <div class="actions">
@@ -150,5 +151,25 @@ function addTag() {}
 .actions button:disabled {
   background-color: #e0e0e0;
   cursor: not-allowed;
+}
+.add-tag {
+  display: flex;
+  flex-direction: row;
+}
+.tag-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 1000;
+}
+
+button {
+  position: relative;
+  margin: 5px;
 }
 </style>
