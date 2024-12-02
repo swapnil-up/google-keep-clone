@@ -13,7 +13,42 @@ const notes = ref([
     content: "this is a test note",
     tags: ["work", "first"],
   },
-  { id: 2, title: "second note", content: "asd;lfkj;", tags: ["first"] },
+  {
+    id: 2,
+    title: "second note",
+    content: "asd jjl",
+    tags: ["first"],
+  },
+  {
+    id: 3,
+    title: "grocery list",
+    content: "Buy milk, bread, and eggs",
+    tags: ["personal", "shopping"],
+  },
+  {
+    id: 4,
+    title: "meeting notes",
+    content: "Discuss project roadmap and deliverables",
+    tags: ["work", "important"],
+  },
+  {
+    id: 5,
+    title: "fitness goals",
+    content: "Run 5km daily, eat healthy meals",
+    tags: ["personal", "health"],
+  },
+  {
+    id: 6,
+    title: "book recommendations",
+    content: "The Alchemist, Atomic Habits, Sapiens",
+    tags: ["reading", "leisure"],
+  },
+  {
+    id: 7,
+    title: "vacation plans",
+    content: "Visit Bali in summer, book flights and hotels",
+    tags: ["travel", "planning"],
+  },
 ]);
 
 function handleAddNote(newNote) {
@@ -24,12 +59,11 @@ function handleAddNote(newNote) {
 <template>
   <div class="app">
     <Sidebar class="sidebar" />
-    <div class="main-area">
+    <div class="main-content-area">
       <NavBar :notes="notes" />
-
-      <div class="main-content-area">
-        <AddNoteCard @add-note="handleAddNote" />
-        <draggable v-model="notes" handle=".drag-handle">
+      <AddNoteCard @add-note="handleAddNote" />
+      <div class="notes-area">
+        <draggable v-model="notes" handle=".drag-handle" class="single-note">
           <template #item="{ element }">
             <NoteCard :note="element" />
           </template>
@@ -45,28 +79,28 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .app {
-  display: flex;
-  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 10fr;
 }
 .sidebar {
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-}
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  position: sticky;
 }
 .main-content-area {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
 }
-.notes {
-  margin-top: 15px;
-  padding: 20px;
+.notes-area {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: row;
+  gap: 16px;
+  padding: 10px;
+}
+.single-note {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .drag-handle {
   cursor: grab;

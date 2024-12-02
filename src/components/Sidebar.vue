@@ -37,7 +37,6 @@ function toggleMenu() {
   background-color: grey;
   color: white;
   transition: width 0.3s ease-in-out;
-  position: fixed;
   left: 0;
   top: 0;
 }
@@ -52,9 +51,6 @@ function toggleMenu() {
   color: white;
   padding: 16px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .menu-icon {

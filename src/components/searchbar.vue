@@ -42,8 +42,8 @@ watch(input, (newValue) => emit("update:input", newValue));
 </template>
 
 <style>
-.searchbar-area {
+/* .searchbar-area {
   display: flex;
   flex-direction: column;
-}
+} */
 </style>

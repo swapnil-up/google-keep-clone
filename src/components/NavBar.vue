@@ -14,50 +14,39 @@ const props = defineProps({
 
 <template>
   <div class="navbar">
-    <div class="top-items-nav">
-      <div class="buttons-top-nav">
-        <div>
-          <img
-            src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
-          />
-        </div>
-        <div class="title">Keep</div>
-        <searchbar :items="notes" filterKey="title" />
-      </div>
+    <div class="left-side">
+      <img
+        src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
+      />
+      <div class="title">Keep</div>
+    </div>
+    <div>
+      <searchbar :items="notes" filterKey="title" />
+    </div>
+    <div class="right-side">
+      <img src="https://accounts.google.com/SignOutOptions?hl=en&continue" />
     </div>
   </div>
 </template>
 
 <style>
-/* .navbar {
+.navbar {
+  padding: 15px;
   display: flex;
   flex-direction: row;
-} */
-.top-items-nav {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-color: black;
+  align-items: stretch;
 }
-.buttons-top-nav {
-  display: flex;
+.left-side {
   align-items: center;
+  display: flex;
+  flex-direction: row;
 }
-.menu-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
+.title {
+  font-size: large;
 }
-.menu-icon {
-  size: "26";
-}
-
 .search-bar {
   padding: 5px;
-  width: 250px;
   height: 100%;
   border-radius: 4px;
   border: 1px solid #ccc;
