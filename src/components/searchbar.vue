@@ -55,6 +55,8 @@ watch(input, (newValue) => emit("update:input", newValue));
   display: flex;
   flex-direction: row;
   border: 1px solid gray;
+  border-radius: 5px;
+  background-color: rgb(229, 229, 229);
   width: 100%;
 }
 .search-icon {

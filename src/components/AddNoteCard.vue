@@ -1,5 +1,7 @@
 <script setup>
 import { ref, defineEmits } from "vue";
+import checkbox from "vue-material-design-icons/CheckboxMarkedOutline.vue";
+import gallery from "vue-material-design-icons/ImageOutline.vue";
 
 const emit = defineEmits(["add-note"]);
 
@@ -46,6 +48,8 @@ function addTag() {}
         placeholder="Take a note... "
         v-model="newNote.content"
       />
+      <checkbox />
+      <gallery />
     </div>
     <div v-else class="expanded">
       <input type="text" placeholder="Title" v-model="newNote.title" />
@@ -73,9 +77,9 @@ function addTag() {}
   width: 100%;
   max-width: 500px;
   margin: 20px auto;
-  background-color: #f4f4f4;
+  background-color: white;
   border-radius: 8px;
-  padding: 10px;
+  border: 1px solid grey;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -83,13 +87,19 @@ function addTag() {}
 .collapsed input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
   font-size: 16px;
   color: #333;
   outline: none;
   transition: all 0.3s ease;
+}
+.collapsed {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  color: grey;
 }
 
 .expanded {

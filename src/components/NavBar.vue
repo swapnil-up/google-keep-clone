@@ -22,8 +22,8 @@ const props = defineProps({
     </div>
     <searchbar style="flex-grow: 4" :items="notes" filterKey="title" />
     <div class="right-side">
-      <div><user /></div>
       <div><grid /></div>
+      <div><user /></div>
     </div>
   </div>
 </template>
@@ -75,6 +75,7 @@ const props = defineProps({
   min-width: 100px;
   flex-shrink: 1;
   overflow: hidden;
+  color: gray;
 }
 
 @media (max-width: 600px) {
