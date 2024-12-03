@@ -47,7 +47,6 @@ const istagDialog = ref(false);
 function toggleTagDialog() {
   istagDialog.value = !istagDialog.value;
 }
-
 </script>
 
 <template>
@@ -70,7 +69,7 @@ function toggleTagDialog() {
       ></textarea>
       <div name="add-tag">
         <button name="add-tag-button" @click="toggleTagDialog()">
-          <labels />
+          <labels style="color: gray" />
         </button>
         <div v-if="istagDialog" class="tag-dialog">
           <tagList :notes="notes" />
@@ -86,8 +85,8 @@ function toggleTagDialog() {
 
 <style scoped>
 .addbar {
-  width: 100%;
-  max-width: 500px;
+  width: 80%;
+  max-width: 1000px;
   margin: 20px auto;
   background-color: white;
   border-radius: 8px;
@@ -118,12 +117,12 @@ function toggleTagDialog() {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 15px;
 }
 
 .expanded input,
 .expanded textarea {
   padding: 12px;
-  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
   color: #333;
@@ -180,9 +179,10 @@ function toggleTagDialog() {
   border-radius: 8px;
   padding: 20px;
   z-index: 1000;
+  list-style-type: none;
 }
 
-button {
+.button {
   position: relative;
   margin: 5px;
 }

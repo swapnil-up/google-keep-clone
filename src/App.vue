@@ -67,18 +67,20 @@ function updateFilteredNotes(newNotes) {
     <Sidebar class="sidebar" :notes="notes" />
     <div class="main-content-area">
       <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
-      <AddNoteCard @add-note="handleAddNote" :notes="notes" />
-      <div class="notes-area">
-        <draggable
-          v-model="filteredNotes"
-          handle=".drag-handle"
-          class="single-note"
-          item-key="id"
-        >
-          <template #item="{ element }">
-            <NoteCard :note="element" />
-          </template>
-        </draggable>
+      <div class="main-content">
+        <AddNoteCard @add-note="handleAddNote" :notes="notes" />
+        <div class="notes-area">
+          <draggable
+            v-model="filteredNotes"
+            handle=".drag-handle"
+            class="single-note"
+            item-key="id"
+          >
+            <template #item="{ element }">
+              <NoteCard :note="element" />
+            </template>
+          </draggable>
+        </div>
       </div>
     </div>
   </div>
@@ -102,6 +104,11 @@ body {
   flex-direction: column;
   margin-left: 60px;
   width: 100%;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
 }
 .notes-area {
   display: flex;

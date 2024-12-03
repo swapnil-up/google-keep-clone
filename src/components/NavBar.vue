@@ -26,6 +26,7 @@ function updateFilteredNotes(newNotes) {
       <div class="title">Keep</div>
     </div>
     <searchbar
+      class="searchbar-area"
       style="flex-grow: 4"
       :items="notes"
       filterKey="title"
@@ -54,8 +55,9 @@ function updateFilteredNotes(newNotes) {
   align-items: center;
   display: flex;
   flex-direction: row;
-  min-width: 120px;
+  min-width: 15%;
   gap: 10px;
+  margin-right: 10px;
 }
 .title {
   font-family: "Product Sans";
@@ -75,7 +77,6 @@ function updateFilteredNotes(newNotes) {
   font-size: 14px;
   margin-left: 3%;
   max-width: 60%;
-  overflow: hidden;
 }
 .right-side {
   align-items: center;
@@ -96,8 +97,14 @@ function updateFilteredNotes(newNotes) {
   .navbar {
     justify-content: flex-start;
   }
-  .left-side {
-    min-width: 40px;
+  .search-bar-area {
+    display: none;
   }
 }
+
+/* @media (max-width: 400px) {
+  .search-bar {
+    display: none;
+  }
+} */
 </style>

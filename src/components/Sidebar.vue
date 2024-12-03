@@ -3,16 +3,24 @@ import { ref } from "vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
 import reminders from "vue-material-design-icons/BellOutline.vue";
-import notes from "vue-material-design-icons/LightbulbOutline.vue";
+import notesIcon from "vue-material-design-icons/LightbulbOutline.vue";
 import editLabel from "vue-material-design-icons/PencilOutline.vue";
 import archive from "vue-material-design-icons/ArchiveArrowDownOutline.vue";
 import bin from "vue-material-design-icons/TrashCanOutline.vue";
+import tagList from "./tagList.vue";
+
+const props = defineProps({
+  notes: {
+    type: Array,
+    required: true,
+    default: () => [],
+  },
+});
 
 var isToggled = ref(false);
 
 function toggleMenu() {
   isToggled.value = !isToggled.value;
-  console.log(isToggled.value);
 }
 </script>
 
@@ -26,13 +34,14 @@ function toggleMenu() {
     </button>
     <div v-if="isToggled" class="sidebar-items-container">
       <ul class="sidebar-items">
-        <li class="sidebar-item"><notes /> Notes</li>
+        <li class="sidebar-item"><notesIcon /> Notes</li>
         <li class="sidebar-item"><reminders /> Reminders</li>
         <li class="sidebar-item"><labels /> Labels</li>
         <li class="sidebar-item"><editLabel /> Edit Labels</li>
         <li class="sidebar-item"><archive /> Archive</li>
         <li class="sidebar-item"><bin /> Bin</li>
       </ul>
+      <div class="tag-lists"><tagList :notes="notes" /></div>
     </div>
   </div>
 </template>
@@ -80,8 +89,15 @@ function toggleMenu() {
   align-items: center;
 }
 
+.tag-lists {
+  list-style-type: none;
+  font-size: larger;
+}
 .sidebar-items-container {
   padding: 16px;
+  color: black;
+  overflow: scroll;
+  max-width: 200px;
 }
 
 .sidebar-items {
@@ -101,6 +117,6 @@ function toggleMenu() {
 }
 
 .sidebar-item:hover {
-  background-color: #3a3a3a;
+  background-color: #adadad;
 }
 </style>
