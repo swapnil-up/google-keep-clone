@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, onMounted } from "vue";
 import { watch } from "vue";
 
 const emit = defineEmits(["update:isOpen", "close"]);
@@ -26,16 +26,26 @@ function closeModal() {
   emit("update:isOpen", false);
   emit("close");
 }
+
+const handleKeyup = (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", handleKeyup);
+});
 </script>
 
 <template>
-  <div id="modal-unique">
+  <div id="modal-unique" @keyup.esc="closeModal">
     <div v-if="isOpen" class="modal-overlay">
       <div class="modal-content">
         <h1>Edit Note</h1>
-        <input v-model="note.title" />
+        <input v-model="note.title" @keyup.esc="closeModal" />
         <br />
-        <input v-model="note.content" />
+        <input v-model="note.content" @keyup.esc="closeModal" />
         <br />
         <button @click.stop="closeModal">Close</button>
       </div>

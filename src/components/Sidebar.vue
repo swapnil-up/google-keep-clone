@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
 import reminders from "vue-material-design-icons/BellOutline.vue";
@@ -22,12 +22,23 @@ var isToggled = ref(false);
 function toggleMenu() {
   isToggled.value = !isToggled.value;
 }
+
+const handleKeyup = (event) => {
+  if (event.key === "Escape") {
+    isToggled.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", handleKeyup);
+});
 </script>
 
 <template>
   <div
     :class="{ 'sidebar-expanded': isToggled, 'sidebar-collapsed': !isToggled }"
     class="sidebar"
+    @keyup.esc="isToggled = false"
   >
     <button class="menu-button" @click="toggleMenu">
       <MenuIcon class="menu-icon" />

@@ -55,9 +55,10 @@ function updateFilteredNotes(newNotes) {
   align-items: center;
   display: flex;
   flex-direction: row;
-  min-width: 15%;
+  min-width: 120px;
   gap: 10px;
   margin-right: 10px;
+  overflow: hidden;
 }
 .title {
   font-family: "Product Sans";
@@ -69,14 +70,14 @@ function updateFilteredNotes(newNotes) {
 .img {
   height: 40px;
 }
-.search-bar {
+.searchbar-area {
   padding: 5px;
   height: 100%;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 14px;
   margin-left: 3%;
-  max-width: 60%;
+  overflow: hidden;
 }
 .right-side {
   align-items: center;
@@ -90,21 +91,32 @@ function updateFilteredNotes(newNotes) {
 }
 
 @media (max-width: 600px) {
-  .title,
+  .navbar {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+  }
+  .title {
+    display: none;
+  }
   .right-side {
     display: none;
   }
-  .navbar {
-    justify-content: flex-start;
+  .left-side {
+    min-width: 40px;
   }
-  .search-bar-area {
-    display: none;
+  .searchbar-area {
+    flex-grow: 1;
+    flex-shrink: 2;
   }
 }
 
-/* @media (max-width: 400px) {
-  .search-bar {
-    display: none;
+@media (max-width: 450px) {
+  .left-side {
+    margin: 0px;
   }
-} */
+  .searchbar-area {
+    margin: 0px;
+  }
+}
 </style>

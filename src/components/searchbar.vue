@@ -25,7 +25,7 @@ const filteredList = computed(() =>
     if (props.filterKey && typeof item === "object") {
       return item[props.filterKey]
         ?.toLowerCase()
-        .includes(input.value.toLowerCase()); 
+        .includes(input.value.toLowerCase());
     }
     return false;
   })

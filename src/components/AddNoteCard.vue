@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, watch } from "vue";
+import { ref, defineEmits, watch, onMounted, nextTick } from "vue";
 import checkbox from "vue-material-design-icons/CheckboxMarkedOutline.vue";
 import gallery from "vue-material-design-icons/ImageOutline.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
@@ -21,6 +21,7 @@ const newNote = ref({
   content: "",
   tags: [],
 });
+const textareaRef = ref(null);
 
 function expand() {
   isExpanded.value = true;
@@ -47,10 +48,28 @@ const istagDialog = ref(false);
 function toggleTagDialog() {
   istagDialog.value = !istagDialog.value;
 }
+
+const handleKeyup = (event) => {
+  if (event.key === "Escape") {
+    reset();
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", handleKeyup);
+});
+
+watch(isExpanded, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      textareaRef.value?.focus();
+    });
+  }
+});
 </script>
 
 <template>
-  <div class="addbar" @click="expand" @click.stop="addNote">
+  <div class="addbar" @click="expand">
     <div v-if="!isExpanded" class="collapsed">
       <input
         type="text"
@@ -66,6 +85,7 @@ function toggleTagDialog() {
         type="text"
         placeholder="Take a note... "
         v-model="newNote.content"
+        ref="textareaRef"
       ></textarea>
       <div name="add-tag">
         <button name="add-tag-button" @click="toggleTagDialog()">
