@@ -1,11 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import draggable from "vuedraggable";
 import NavBar from "./components/NavBar.vue";
 import NoteCard from "./components/NoteCard.vue";
 import AddNoteCard from "./components/AddNoteCard.vue";
 import Sidebar from "./components/Sidebar.vue";
-import taglist from "./components/tagList.vue";
 
 const notes = ref([
   {
@@ -65,16 +64,16 @@ function updateFilteredNotes(newNotes) {
 
 <template>
   <div class="app">
-    <Sidebar class="sidebar" />
+    <Sidebar class="sidebar" :notes="notes" />
     <div class="main-content-area">
       <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
-      <AddNoteCard @add-note="handleAddNote" />
-      <taglist :notes="notes" />
+      <AddNoteCard @add-note="handleAddNote" :notes="notes" />
       <div class="notes-area">
         <draggable
           v-model="filteredNotes"
           handle=".drag-handle"
           class="single-note"
+          item-key="id"
         >
           <template #item="{ element }">
             <NoteCard :note="element" />

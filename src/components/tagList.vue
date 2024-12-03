@@ -26,7 +26,6 @@ function updateFilteredTags(newTags) {
 
 <template>
   <div>
-    <p>tag div</p>
     <searchbar :items="uniqueTags" @update:filtered="updateFilteredTags" />
     <li v-for="(tag, index) in filteredTags" :key="index">
       {{ tag }}

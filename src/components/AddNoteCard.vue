@@ -1,8 +1,17 @@
 <script setup>
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, watch } from "vue";
 import checkbox from "vue-material-design-icons/CheckboxMarkedOutline.vue";
 import gallery from "vue-material-design-icons/ImageOutline.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
+import tagList from "./tagList.vue";
+
+const props = defineProps({
+  notes: {
+    type: Array,
+    required: true,
+    default: () => [],
+  },
+});
 
 const emit = defineEmits(["add-note"]);
 
@@ -38,7 +47,7 @@ const istagDialog = ref(false);
 function toggleTagDialog() {
   istagDialog.value = !istagDialog.value;
 }
-function addTag() {}
+
 </script>
 
 <template>
@@ -64,7 +73,7 @@ function addTag() {}
           <labels />
         </button>
         <div v-if="istagDialog" class="tag-dialog">
-          <li v-for="tag in note.tags" :key="index">{{ tag }}</li>
+          <tagList :notes="notes" />
         </div>
       </div>
       <div class="actions">
