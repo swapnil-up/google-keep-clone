@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar.vue";
 import NoteCard from "./components/NoteCard.vue";
 import AddNoteCard from "./components/AddNoteCard.vue";
 import Sidebar from "./components/Sidebar.vue";
+import taglist from "./components/tagList.vue";
 
 const notes = ref([
   {
@@ -54,14 +55,19 @@ const notes = ref([
 function handleAddNote(newNote) {
   notes.value.push(newNote);
 }
+
+function updateFilteredNotes(filteredNotes) {
+  notes.value = filteredNotes;
+}
 </script>
 
 <template>
   <div class="app">
     <Sidebar class="sidebar" />
     <div class="main-content-area">
-      <NavBar :notes="notes" />
+      <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
       <AddNoteCard @add-note="handleAddNote" />
+      <taglist :notes="notes" />
       <div class="notes-area">
         <draggable v-model="notes" handle=".drag-handle" class="single-note">
           <template #item="{ element }">

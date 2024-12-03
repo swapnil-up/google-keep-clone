@@ -1,6 +1,5 @@
 <script setup>
 import { computed, ref, watch } from "vue";
-import NoteCard from "./NoteCard.vue";
 import search from "vue-material-design-icons/Magnify.vue";
 
 const props = defineProps({
@@ -10,21 +9,30 @@ const props = defineProps({
   },
   filterKey: {
     type: String,
-    default: "title",
+    default: null,
   },
 });
 
-const emit = defineEmits(["update:input"]);
+const emit = defineEmits(["update:input", "update:filtered"]);
 
 let input = ref("");
 
 const filteredList = computed(() =>
-  props.items.filter((item) =>
-    item[props.filterKey]?.toLowerCase().includes(input.value.toLowerCase())
-  )
+  props.items.filter((item) => {
+    if (typeof item === "string") {
+      return item.toLowerCase().includes(input.value.toLowerCase());
+    }
+    if (props.filterKey && typeof item === "object") {
+      return item[props.filterKey]
+        ?.toLowerCase()
+        .includes(input.value.toLowerCase()); 
+    }
+    return false;
+  })
 );
 
 watch(input, (newValue) => emit("update:input", newValue));
+watch(filteredList, (newList) => emit("update:filtered", newList));
 </script>
 
 <template>
@@ -37,12 +45,6 @@ watch(input, (newValue) => emit("update:input", newValue));
       v-model="input"
     />
     <div class="searchbar-area" v-if="input">
-      <NoteCard
-        v-for="item in filteredList"
-        :key="item.id"
-        :note="item"
-        class="note-card"
-      />
       <div class="error" v-if="filteredList === 0">
         <p>No results found</p>
       </div>

@@ -64,7 +64,7 @@ const removeTag = (note, index) => {
   font-size: 18px;
 }
 .tag-button {
-  background-color: #6200ea;
+  background-color: #cfcfcf;
   padding: 5px;
   margin-top: 15px;
   margin: 5px;

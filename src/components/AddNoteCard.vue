@@ -2,6 +2,7 @@
 import { ref, defineEmits } from "vue";
 import checkbox from "vue-material-design-icons/CheckboxMarkedOutline.vue";
 import gallery from "vue-material-design-icons/ImageOutline.vue";
+import labels from "vue-material-design-icons/LabelOutline.vue";
 
 const emit = defineEmits(["add-note"]);
 
@@ -59,9 +60,11 @@ function addTag() {}
         v-model="newNote.content"
       ></textarea>
       <div name="add-tag">
-        <button name="add-tag-button" @click="toggleTagDialog()">+ tag</button>
+        <button name="add-tag-button" @click="toggleTagDialog()">
+          <labels />
+        </button>
         <div v-if="istagDialog" class="tag-dialog">
-          <li v-for="tag in newNote.tags" :key="tag">{{ tag }}</li>
+          <li v-for="tag in note.tags" :key="index">{{ tag }}</li>
         </div>
       </div>
       <div class="actions">
@@ -158,14 +161,11 @@ function addTag() {}
   cursor: not-allowed;
 }
 .add-tag {
-  display: flex;
-  flex-direction: row;
+  display: inline;
 }
 .tag-dialog {
+  display: inline;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
