@@ -56,8 +56,10 @@ function handleAddNote(newNote) {
   notes.value.push(newNote);
 }
 
-function updateFilteredNotes(filteredNotes) {
-  notes.value = filteredNotes;
+const filteredNotes = ref([...notes.value]);
+
+function updateFilteredNotes(newNotes) {
+  filteredNotes.value = newNotes;
 }
 </script>
 
@@ -69,7 +71,11 @@ function updateFilteredNotes(filteredNotes) {
       <AddNoteCard @add-note="handleAddNote" />
       <taglist :notes="notes" />
       <div class="notes-area">
-        <draggable v-model="notes" handle=".drag-handle" class="single-note">
+        <draggable
+          v-model="filteredNotes"
+          handle=".drag-handle"
+          class="single-note"
+        >
           <template #item="{ element }">
             <NoteCard :note="element" />
           </template>
@@ -96,6 +102,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 60px;
+  width: 100%;
 }
 .notes-area {
   display: flex;

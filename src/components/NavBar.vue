@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch, defineEmits } from "vue";
 import searchbar from "./searchbar.vue";
 import user from "vue-material-design-icons/AccountCircle.vue";
 import grid from "vue-material-design-icons/DotsGrid.vue";
@@ -10,6 +10,11 @@ const props = defineProps({
     required: true,
   },
 });
+const emit = defineEmits(["update:filteredNotes"]);
+
+function updateFilteredNotes(newNotes) {
+  emit("update:filteredNotes", newNotes);
+}
 </script>
 
 <template>
@@ -20,7 +25,12 @@ const props = defineProps({
       />
       <div class="title">Keep</div>
     </div>
-    <searchbar style="flex-grow: 4" :items="notes" filterKey="title" />
+    <searchbar
+      style="flex-grow: 4"
+      :items="notes"
+      filterKey="title"
+      @update:filtered="updateFilteredNotes"
+    />
     <div class="right-side">
       <div><grid /></div>
       <div><user /></div>
