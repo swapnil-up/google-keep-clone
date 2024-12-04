@@ -4,6 +4,8 @@ import checkbox from "vue-material-design-icons/CheckboxMarkedOutline.vue";
 import gallery from "vue-material-design-icons/ImageOutline.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
+import { useStore } from "vuex";
+const store = useStore();
 
 const { notes } = defineProps({
   notes: {
@@ -37,6 +39,7 @@ function addNote() {
       title: newNote.value.title,
     });
     reset();
+    store.commit("incrementNotesCount", 1);
   }
 }
 

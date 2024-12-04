@@ -1,8 +1,11 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import draggable from "vuedraggable";
 import NoteCard from "../components/NoteCard.vue";
 import AddNoteCard from "../components/AddNoteCard.vue";
+import { useStore } from "vuex";
+const store = useStore();
+const count = computed(() => store.state.notesCount);
 
 const { notes, filteredNotes } = defineProps({
   notes: { type: Array, Required: true },
@@ -27,6 +30,7 @@ function updateFilteredNotes(newFilteredNotes) {
 <template>
   <div class="main-content">
     <AddNoteCard @add-note="handleAddNote" :notes="notes" />
+    <h3>New Notes Added: {{ count }}</h3>
     <div class="notes-area">
       <draggable
         v-bind:model-value="filteredNotes"
