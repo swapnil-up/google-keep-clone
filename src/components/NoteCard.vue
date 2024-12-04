@@ -9,8 +9,6 @@ defineProps({
   },
 });
 
-const emit = defineEmits(["click"]);
-
 const showModal = ref(false);
 const modalData = ref(null);
 

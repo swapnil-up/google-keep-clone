@@ -7,6 +7,7 @@ import notesIcon from "vue-material-design-icons/LightbulbOutline.vue";
 import editLabel from "vue-material-design-icons/PencilOutline.vue";
 import archive from "vue-material-design-icons/ArchiveArrowDownOutline.vue";
 import bin from "vue-material-design-icons/TrashCanOutline.vue";
+import about from "vue-material-design-icons/InformationOutline.vue";
 import tagList from "./tagList.vue";
 
 const props = defineProps({
@@ -45,12 +46,20 @@ onMounted(() => {
     </button>
     <div v-if="isToggled" class="sidebar-items-container">
       <ul class="sidebar-items">
-        <li class="sidebar-item"><notesIcon /> Notes</li>
-        <li class="sidebar-item"><reminders /> Reminders</li>
-        <li class="sidebar-item"><labels /> Labels</li>
+        <li class="sidebar-item">
+          <notesIcon /> <router-link to="/">Notes</router-link>
+        </li>
+        <li class="sidebar-item">
+          <reminders /> <router-link to="/reminder">Reminders</router-link>
+        </li>
         <li class="sidebar-item"><editLabel /> Edit Labels</li>
-        <li class="sidebar-item"><archive /> Archive</li>
+        <li class="sidebar-item">
+          <archive /> <router-link to="/archive">Archives</router-link>
+        </li>
         <li class="sidebar-item"><bin /> Bin</li>
+        <li class="sidebar-item">
+          <about /> <router-link to="/about">About</router-link>
+        </li>
       </ul>
       <div class="tag-lists"><tagList :notes="notes" /></div>
     </div>

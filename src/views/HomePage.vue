@@ -18,6 +18,10 @@ function handleAddNote(newNote) {
   const updatedNotes = [...notes, newNote];
   emit("update-notes", updatedNotes);
 }
+
+function updateFilteredNotes(newFilteredNotes) {
+  emit("update-notes", newFilteredNotes); // Update notes in parent when filteredNotes changes
+}
 </script>
 
 <template>
@@ -26,7 +30,7 @@ function handleAddNote(newNote) {
     <div class="notes-area">
       <draggable
         v-bind:model-value="filteredNotes"
-        @update:model-value="filteredNotes = $event"
+        @update:model-value="updateFilteredNotes($event)"
         handle=".drag-handle"
         class="single-note"
         item-key="id"

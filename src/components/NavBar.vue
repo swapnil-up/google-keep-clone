@@ -19,12 +19,15 @@ function updateFilteredNotes(newNotes) {
 
 <template>
   <div class="navbar">
-    <div class="left-side">
-      <img
-        src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
-      />
-      <div class="title">Keep</div>
-    </div>
+    <router-link to="/">
+      <div class="left-side">
+        <img
+          src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
+        />
+
+        <div class="title">Keep</div>
+      </div>
+    </router-link>
     <searchbar
       class="searchbar-area"
       style="flex-grow: 4"

@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
 
 const notes = ref([
   {
@@ -60,12 +59,6 @@ function updateFilteredNotes(newNotes) {
 function updateNotes(newNotes) {
   notes.value = newNotes;
 }
-
-// router.beforeEach((to, from, next) => {
-//   to.meta.notes = notes.value;
-//   // to.meta.filteredNotes = filteredNotes.value;
-//   next();
-// });
 </script>
 
 <template>
