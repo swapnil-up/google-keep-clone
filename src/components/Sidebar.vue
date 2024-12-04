@@ -56,7 +56,9 @@ onMounted(() => {
         <li class="sidebar-item">
           <archive /> <router-link to="/archive">Archives</router-link>
         </li>
-        <li class="sidebar-item"><bin /> Bin</li>
+        <li class="sidebar-item">
+          <bin /><router-link to="/bin">Bin</router-link>
+        </li>
         <li class="sidebar-item">
           <about /> <router-link to="/about">About</router-link>
         </li>

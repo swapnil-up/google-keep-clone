@@ -3,6 +3,8 @@ import Home from "./views/HomePage.vue";
 import About from "./views/AboutPage.vue";
 import Archive from "./views/ArchivePage.vue";
 import Reminder from "./views/RemindersPage.vue";
+import Bin from "./views/BinPage.vue";
+import NotFound from "./views/NotFoundPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +28,14 @@ const router = createRouter({
       path: "/reminder",
       name: "reminder",
       component: Reminder,
+    },
+    {
+      path: "/bin",
+      redirect: "/",
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      component: NotFound,
     },
   ],
 });

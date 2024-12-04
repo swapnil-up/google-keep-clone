@@ -10,7 +10,11 @@ const search = computed({
     return route.query.search ?? "";
   },
   set(search) {
-    router.replace({ query: { search } });
+    if (search === "") {
+      router.replace({ query: { search: undefined } });
+    } else {
+      router.replace({ query: { search } });
+    }
   },
 });
 </script>
