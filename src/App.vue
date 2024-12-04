@@ -67,6 +67,7 @@ function updateFilteredNotes(newNotes) {
     <Sidebar class="sidebar" :notes="notes" />
     <div class="main-content-area">
       <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
+      <router-view />
       <div class="main-content">
         <AddNoteCard @add-note="handleAddNote" :notes="notes" />
         <div class="notes-area">
