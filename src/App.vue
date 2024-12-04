@@ -1,10 +1,10 @@
 <script setup>
 import { ref, watch } from "vue";
-import draggable from "vuedraggable";
 import NavBar from "./components/NavBar.vue";
-import NoteCard from "./components/NoteCard.vue";
-import AddNoteCard from "./components/AddNoteCard.vue";
 import Sidebar from "./components/Sidebar.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const notes = ref([
   {
@@ -51,15 +51,21 @@ const notes = ref([
   },
 ]);
 
-function handleAddNote(newNote) {
-  notes.value.push(newNote);
-}
-
 const filteredNotes = ref([...notes.value]);
 
 function updateFilteredNotes(newNotes) {
   filteredNotes.value = newNotes;
 }
+
+function updateNotes(newNotes) {
+  notes.value = newNotes;
+}
+
+// router.beforeEach((to, from, next) => {
+//   to.meta.notes = notes.value;
+//   // to.meta.filteredNotes = filteredNotes.value;
+//   next();
+// });
 </script>
 
 <template>
@@ -67,22 +73,11 @@ function updateFilteredNotes(newNotes) {
     <Sidebar class="sidebar" :notes="notes" />
     <div class="main-content-area">
       <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
-      <router-view />
-      <div class="main-content">
-        <AddNoteCard @add-note="handleAddNote" :notes="notes" />
-        <div class="notes-area">
-          <draggable
-            v-model="filteredNotes"
-            handle=".drag-handle"
-            class="single-note"
-            item-key="id"
-          >
-            <template #item="{ element }">
-              <NoteCard :note="element" />
-            </template>
-          </draggable>
-        </div>
-      </div>
+      <RouterView
+        :filteredNotes="filteredNotes"
+        :notes="notes"
+        @update-notes="updateNotes"
+      />
     </div>
   </div>
 </template>
@@ -105,28 +100,5 @@ body {
   flex-direction: column;
   margin-left: 60px;
   width: 100%;
-}
-.main-content {
-  display: flex;
-  flex-direction: column;
-  margin-right: 5%;
-}
-.notes-area {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 16px;
-  padding: 10px;
-}
-.single-note {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.drag-handle {
-  cursor: grab;
-}
-.modal-div {
-  background-color: white;
 }
 </style>

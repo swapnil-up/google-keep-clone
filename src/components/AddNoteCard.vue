@@ -5,7 +5,7 @@ import gallery from "vue-material-design-icons/ImageOutline.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
 
-const props = defineProps({
+const { notes } = defineProps({
   notes: {
     type: Array,
     required: true,
@@ -30,6 +30,7 @@ function expand() {
 function addNote() {
   if (newNote.value.title.trim() != "") {
     console.log("sending");
+    console.log(newNote.value);
     emit("add-note", {
       id: Date.now(),
       content: newNote.value.content,
