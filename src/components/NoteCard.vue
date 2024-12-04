@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import EditModal from "./EditModal.vue";
 
 defineProps({
@@ -13,8 +13,10 @@ const showModal = ref(false);
 const modalData = ref(null);
 
 function editCard(note) {
-  showModal.value = true;
-  modalData.value = note;
+  if (note) {
+    showModal.value = true;
+    modalData.value = note;
+  }
 }
 function closeModal() {
   showModal.value = false;
@@ -30,7 +32,11 @@ const removeTag = (note, index) => {
       <h3>{{ note.title }}</h3>
       <p>{{ note.content }}</p>
       <div class="tags">
-        <span v-for="(tag, index) in note.tags" :key="index" class="tag-button">
+        <span
+          v-for="(tag, index) in note.tags"
+          :key="note.id"
+          class="tag-button"
+        >
           {{ tag }}
           <button @click.stop="removeTag(note, index)" class="delete-tag">
             x
@@ -40,6 +46,7 @@ const removeTag = (note, index) => {
 
       <div class="modal-div">
         <EditModal
+          v-if="modalData"
           :isOpen="showModal"
           @update:isOpen="showModal = $event"
           :note="modalData"

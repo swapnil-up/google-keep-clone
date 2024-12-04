@@ -12,7 +12,8 @@ const { notes } = defineProps({
 const uniqueTags = computed(() => {
   const tagSet = new Set();
   notes.forEach((note) => {
-    note.tags.forEach((tag) => tagSet.add(tag));
+    const tags = Array.isArray(note.tags) ? note.tags : [];
+    tags.forEach((tag) => tagSet.add(tag));
   });
   return Array.from(tagSet);
 });

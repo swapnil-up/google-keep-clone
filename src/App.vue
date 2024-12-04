@@ -4,7 +4,6 @@ import NavBar from "./components/NavBar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import { useRouter } from "vue-router";
 
-
 const notes = ref([
   {
     id: 1,
@@ -55,10 +54,6 @@ const filteredNotes = ref([...notes.value]);
 function updateFilteredNotes(newNotes) {
   filteredNotes.value = newNotes;
 }
-
-function updateNotes(newNotes) {
-  notes.value = newNotes;
-}
 </script>
 
 <template>
@@ -69,7 +64,7 @@ function updateNotes(newNotes) {
       <RouterView
         :filteredNotes="filteredNotes"
         :notes="notes"
-        @update-notes="updateNotes"
+        @update-notes="updateFilteredNotes"
       />
     </div>
   </div>

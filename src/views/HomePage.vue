@@ -23,7 +23,8 @@ function handleAddNote(newNote) {
 }
 
 function updateFilteredNotes(newFilteredNotes) {
-  emit("update-notes", newFilteredNotes); // Update notes in parent when filteredNotes changes
+  console.log("Filtered Notes:", newFilteredNotes);
+  emit("update-notes", newFilteredNotes);
 }
 </script>
 

@@ -1,23 +1,6 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import searchIcon from "vue-material-design-icons/Magnify.vue";
-import { useRoute, useRouter } from "vue-router";
-
-const router = useRouter();
-const route = useRoute();
-
-const search = computed({
-  get() {
-    return route.query.search ?? "";
-  },
-  set(search) {
-    if (search === "") {
-      router.replace({ query: { search: undefined } });
-    } else {
-      router.replace({ query: { search } });
-    }
-  },
-});
 
 const props = defineProps({
   items: {
@@ -60,7 +43,6 @@ watch(filteredList, (newList) => emit("update:filtered", newList));
       class="search-bar"
       placeholder="Search"
       v-model="input"
-      v-model.trim="search"
     />
     <div class="searchbar-area" v-if="input">
       <div class="error" v-if="filteredList === 0">

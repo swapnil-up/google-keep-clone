@@ -37,6 +37,7 @@ function addNote() {
       id: Date.now(),
       content: newNote.value.content,
       title: newNote.value.title,
+      tags: newNote.value.tags.length > 0 ? newNote.value.tags : [],
     });
     reset();
     store.commit("incrementNotesCount", 1);
