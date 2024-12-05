@@ -53,7 +53,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .modal-overlay {
   position: fixed;
   top: 0;

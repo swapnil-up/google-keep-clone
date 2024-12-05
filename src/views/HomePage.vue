@@ -70,11 +70,8 @@ function incrementCounter() {
   margin-right: 5%;
 }
 .notes-area {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 16px;
   padding: 10px;
+  gap: 16px;
 }
 .single-note {
   display: flex;

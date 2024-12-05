@@ -5,6 +5,7 @@ import gallery from "vue-material-design-icons/ImageOutline.vue";
 import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
 import { useStore } from "vuex";
+import imageSelect from "./imageSelect.vue";
 const store = useStore();
 
 const { notes } = defineProps({
@@ -22,6 +23,7 @@ const newNote = ref({
   title: "",
   content: "",
   tags: [],
+  additionalProperties: {},
 });
 const textareaRef = ref(null);
 
@@ -38,6 +40,9 @@ function addNote() {
       content: newNote.value.content,
       title: newNote.value.title,
       tags: newNote.value.tags.length > 0 ? newNote.value.tags : [],
+      additionalProperties: {
+        image: newNote.value.additionalProperties.image || null,
+      },
     });
     reset();
     store.commit("incrementNotesCount", 1);
@@ -45,13 +50,27 @@ function addNote() {
 }
 
 function reset() {
-  newNote.value = { title: "", content: "" };
+  newNote.value = {
+    title: "",
+    content: "",
+    tags: [],
+    additionalProperties: {},
+  };
   isExpanded.value = false;
 }
 
 const istagDialog = ref(false);
+
 function toggleTagDialog() {
   istagDialog.value = !istagDialog.value;
+}
+
+function updateTags(selectedTags) {
+  newNote.value.tags = selectedTags;
+}
+
+function updateImage(imageUrl) {
+  newNote.value.additionalProperties.image = imageUrl;
 }
 
 const handleKeyup = (event) => {
@@ -100,6 +119,7 @@ watch(isExpanded, (newVal) => {
           <tagList :notes="notes" />
         </div>
       </div>
+      <div><imageSelect @image-selected="updateImage" /></div>
       <div class="actions">
         <button @click.stop="addNote">Add</button>
         <button @click.stop="reset">Close</button>

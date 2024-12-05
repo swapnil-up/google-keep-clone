@@ -31,6 +31,9 @@ const removeTag = (note, index) => {
     <div class="drag-handle">
       <h3>{{ note.title }}</h3>
       <p>{{ note.content }}</p>
+      <div v-if="note.additionalProperties?.image">
+        <img :src="note.additionalProperties.image" />
+      </div>
       <div class="tags">
         <span
           v-for="(tag, index) in note.tags"
@@ -56,13 +59,15 @@ const removeTag = (note, index) => {
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .note-card {
   margin: 5px;
   border: 1px solid grey;
   border-radius: 10px;
   padding: 10px;
-  max-width: 25ch;
+  width: 25ch;
+  height: fit-content;
+  break-inside: avoid;
 }
 .drag-handle {
   margin-bottom: 5px;
