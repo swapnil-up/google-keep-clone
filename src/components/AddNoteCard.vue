@@ -104,12 +104,16 @@ watch(isExpanded, (newVal) => {
       <gallery />
     </div>
     <div v-else class="expanded">
-      <input type="text" placeholder="Title" v-model="newNote.title" />
+      <input
+        type="text"
+        placeholder="Title"
+        v-model="newNote.title"
+        ref="textareaRef"
+      />
       <textarea
         type="text"
         placeholder="Take a note... "
         v-model="newNote.content"
-        ref="textareaRef"
       ></textarea>
       <div name="add-tag">
         <button name="add-tag-button" @click="toggleTagDialog()">

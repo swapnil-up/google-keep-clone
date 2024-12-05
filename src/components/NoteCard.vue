@@ -65,9 +65,12 @@ const removeTag = (note, index) => {
   border: 1px solid grey;
   border-radius: 10px;
   padding: 10px;
-  width: 25ch;
+  max-width: 25ch;
   height: fit-content;
   break-inside: avoid;
+}
+.note-card:hover {
+  background-color: #cfcfcf;
 }
 .drag-handle {
   margin-bottom: 5px;

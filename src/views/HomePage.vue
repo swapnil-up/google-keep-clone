@@ -87,5 +87,12 @@ function incrementCounter() {
 .extraFeatures {
   display: flex;
   gap: 25px;
+  padding: 10px;
+  align-items: baseline;
+}
+button {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
 }
 </style>
