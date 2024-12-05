@@ -3,6 +3,11 @@ import { ref, watch, defineEmits } from "vue";
 import searchbar from "./searchbar.vue";
 import user from "vue-material-design-icons/AccountCircle.vue";
 import grid from "vue-material-design-icons/DotsGrid.vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
+const store = useStore();
+const router = useRouter();
 
 const props = defineProps({
   notes: {
@@ -15,6 +20,11 @@ const emit = defineEmits(["update:filteredNotes"]);
 function updateFilteredNotes(newNotes) {
   emit("update:filteredNotes", newNotes);
 }
+
+const logout = () => {
+  store.commit("logout");
+  router.push({ name: "login" });
+};
 </script>
 
 <template>
@@ -37,7 +47,7 @@ function updateFilteredNotes(newNotes) {
     />
     <div class="right-side">
       <div><grid /></div>
-      <div><user /></div>
+      <div class="userIcon"><user @click="logout" /></div>
     </div>
   </div>
 </template>
@@ -121,5 +131,9 @@ function updateFilteredNotes(newNotes) {
   .searchbar-area {
     margin: 0px;
   }
+}
+
+.userIcon:hover {
+  cursor: grab;
 }
 </style>

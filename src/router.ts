@@ -3,8 +3,9 @@ import Home from "./views/HomePage.vue";
 import About from "./views/AboutPage.vue";
 import Archive from "./views/ArchivePage.vue";
 import Reminder from "./views/RemindersPage.vue";
-import Bin from "./views/BinPage.vue";
+import Login from "./views/LogInPage.vue";
 import NotFound from "./views/NotFoundPage.vue";
+import store from "./stores";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
     },
     {
       path: "/about",
@@ -38,6 +44,14 @@ const router = createRouter({
       component: NotFound,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.name != "login" && !store.state.isLoggedIn) {
+    next({ name: "login" });
+  } else {
+    next();
+  }
 });
 
 export default router;

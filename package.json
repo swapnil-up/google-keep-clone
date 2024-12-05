@@ -12,7 +12,10 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "es6-promise": "^4.2.8",
     "pinia": "^2.2.6",
+    "promise-polyfill": "^8.3.0",
     "vue": "^3.5.12",
     "vue-material-design-icons": "^5.3.1",
     "vue-router": "^4.5.0",
