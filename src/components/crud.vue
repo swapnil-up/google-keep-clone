@@ -73,6 +73,41 @@ function saveButton(post) {
   updatePost(post);
   post.isEditing = false;
 }
+
+
+let currentPage = 2;
+let totalPages = 5;
+
+function fetchContent(page) {
+  fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Data for page", data);
+      if (page < totalPages) {
+        console.log(`fetching next page: ${page + 1}`);
+        fetchContent(page + 1);
+      } else {
+        console.log("no more pages left");
+      }
+    })
+    .catch((error) => {
+      console.log("error received: ", error);
+    });
+}
+
+fetchContent(currentPage);
+
+let query = "^q";
+function getQuery() {
+  fetch(`https://jsonplaceholder.typicode.com/posts?title_like=${query}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => console.error("error is: ", error));
+}
+
+getQuery(query);
 </script>
 
 <template>
