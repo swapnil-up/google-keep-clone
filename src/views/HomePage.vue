@@ -3,6 +3,7 @@ import { ref, watch, computed } from "vue";
 import draggable from "vuedraggable";
 import NoteCard from "../components/NoteCard.vue";
 import AddNoteCard from "../components/AddNoteCard.vue";
+import AutoLogout from "@/components/AutoLogout.vue";
 import { useStore } from "vuex";
 const store = useStore();
 const count = computed(() => store.state.notesCount);
@@ -61,6 +62,7 @@ function incrementCounter() {
       </draggable>
     </div>
   </div>
+  <AutoLogout />
 </template>
 
 <style scoped>
