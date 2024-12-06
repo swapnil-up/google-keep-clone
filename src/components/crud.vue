@@ -74,7 +74,6 @@ function saveButton(post) {
   post.isEditing = false;
 }
 
-
 let currentPage = 2;
 let totalPages = 5;
 
@@ -108,6 +107,21 @@ function getQuery() {
 }
 
 getQuery(query);
+
+let url = "https://jsonplaceholder.typicode."; //deliberate wrong url
+let retries = 3;
+
+function fetchWithRetry(url, retries) {
+  return fetch(url).catch((error) => {
+    if (retries > 0) {
+      console.log(`retrying ${retries} times`);
+      return fetchWithRetry(url, retries - 1);
+    }
+    throw error;
+  });
+}
+
+fetchWithRetry(url, retries);
 </script>
 
 <template>
