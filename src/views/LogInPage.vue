@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import jokePuller from "@/components/jokePuller.vue";
-import crud from "@/components/crud.vue";
+import axios from "@/components/axios.vue";
 
 const store = useStore();
 const router = useRouter();
@@ -17,6 +17,7 @@ const login = () => {
 <template>
   <h2>First you must login.</h2>
   <button @click="login">login</button>
+  <axios />
   <jokePuller />
 </template>
 
