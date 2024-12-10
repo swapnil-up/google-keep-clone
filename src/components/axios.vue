@@ -121,15 +121,16 @@ const fetchUserP = async () => {
     const response = await apiClient.get(
       `users?_page=${page.value}&_limit=${limit.value}`
     );
-    console.log("Full Response:", response);
-    console.log("Headers:", response.headers);
-
-    console.log("Users Data:", response.data);
-
     users.value = response.data;
     console.log(users.value);
   } catch {
-    console.log("pages couldn't be loaded");
+    if (error.response) {
+    console.log("Error response:", error.response);
+  } else if (error.request) {
+    console.log("Error request:", error.request);
+  } else {
+    console.log("Error message:", error.message);
+  }
   }
 };
 </script>
