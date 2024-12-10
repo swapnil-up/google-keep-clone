@@ -125,14 +125,38 @@ const fetchUserP = async () => {
     console.log(users.value);
   } catch {
     if (error.response) {
-    console.log("Error response:", error.response);
-  } else if (error.request) {
-    console.log("Error request:", error.request);
-  } else {
-    console.log("Error message:", error.message);
-  }
+      console.log("Error response:", error.response);
+    } else if (error.request) {
+      console.log("Error request:", error.request);
+    } else {
+      console.log("Error message:", error.message);
+    }
   }
 };
+
+async function fetchViaParams() {
+  try {
+    const response = await apiClient.get(`/users/`, {
+      params: {
+        name: "Clementine Bauch",
+        // username: "Samantha",
+        // website: "ramiro.info",
+        //  this doesn't work because key value pair ma kaam 
+        // garxam, not nested objects:
+        // company: {
+        //   name: "Romaguera-Jacobson",
+        //   catchPhrase: "Face to face bifurcated interface",
+        //   bs: "e-enable strategic applications",
+        // },
+      },
+    });
+    user.value = response.data;
+    console.log(user.value);
+  } catch {
+    console.log("error occured");
+  }
+}
+fetchViaParams();
 </script>
 
 <template>
