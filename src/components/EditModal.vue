@@ -1,6 +1,7 @@
 <script setup>
 import { ref, defineEmits, onMounted } from "vue";
 import { watch } from "vue";
+import apiClient from "../api/axios";
 
 const emit = defineEmits(["update:isOpen", "close"]);
 
@@ -27,6 +28,16 @@ function closeModal() {
   emit("close");
 }
 
+async function saveModal(note) {
+  const response = await apiClient.patch(`/notes/${note.id}`, {
+    title: note.title,
+    content: note.content,
+  });
+  if (response.data.message === "updated") {
+    closeModal();
+  }
+}
+
 const handleKeyup = (event) => {
   if (event.key === "Escape") {
     closeModal();
@@ -47,7 +58,10 @@ onMounted(() => {
         <br />
         <input v-model="note.content" @keyup.esc="closeModal" />
         <br />
-        <button @click.stop="closeModal">Close</button>
+        <div class="buttons-row">
+          <button @click.stop="saveModal(note)">Save</button>
+          <button @click.stop="closeModal">Close</button>
+        </div>
       </div>
     </div>
   </div>
@@ -117,5 +131,11 @@ onMounted(() => {
 
 .modal-content button:hover {
   background-color: #0056b3;
+}
+.buttons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px;
 }
 </style>

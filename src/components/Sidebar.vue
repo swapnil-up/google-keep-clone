@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
-import labels from "vue-material-design-icons/LabelOutline.vue";
 import reminders from "vue-material-design-icons/BellOutline.vue";
 import notesIcon from "vue-material-design-icons/LightbulbOutline.vue";
 import editLabel from "vue-material-design-icons/PencilOutline.vue";
