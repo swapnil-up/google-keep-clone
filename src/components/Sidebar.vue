@@ -86,6 +86,7 @@ onMounted(() => {
   align-items: start;
   margin-top: 1%;
   margin-left: 1%;
+  z-index: 5;
 }
 
 .sidebar-collapsed {

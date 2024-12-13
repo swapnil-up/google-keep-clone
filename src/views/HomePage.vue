@@ -5,25 +5,9 @@ import NoteCard from "../components/NoteCard.vue";
 import AddNoteCard from "../components/AddNoteCard.vue";
 import AutoLogout from "@/components/AutoLogout.vue";
 import { useStore } from "vuex";
-import apiClient from "../api/axios.js";
 
 const store = useStore();
 const count = computed(() => store.state.notesCount);
-
-const apiNotes = ref([]);
-
-const fetchNotes = async () => {
-  try {
-    const response = await apiClient.get("/notes/");
-    apiNotes.value = response.data;
-  } catch (error) {
-    console.error("error acquired", error);
-  }
-};
-
-onMounted(() => {
-  fetchNotes();
-});
 
 const { notes, filteredNotes } = defineProps({
   notes: { type: Array, Required: true },
@@ -33,7 +17,7 @@ const { notes, filteredNotes } = defineProps({
   },
 });
 
-const emit = defineEmits(["update-notes"]);
+const emit = defineEmits(["update-notes", "delete-note"]);
 
 function handleAddNote(newNote) {
   const updatedNotes = [...notes, newNote];
@@ -54,6 +38,10 @@ function incrementCounter() {
   localStorage.setItem("counter", counter.value);
   console.log(localStorage.setItem("counter", counter.value));
 }
+
+const deleteNote = (note) => {
+  emit("delete-note", note);
+};
 </script>
 
 <template>
@@ -66,24 +54,6 @@ function incrementCounter() {
       </button>
     </div>
 
-    <div>
-      <li v-for="note in apiNotes" :key="note.id">
-        {{ note.title }}
-        {{ note.content }}
-        <div
-          v-if="
-            note.additional_properties && note.additional_properties.image_url
-          "
-        >
-          <img
-            :src="
-              `http://localhost:8000` + note.additional_properties.image_url
-            "
-          />
-        </div>
-      </li>
-    </div>
-
     <div class="notes-area">
       <draggable
         v-bind:model-value="filteredNotes"
@@ -93,7 +63,7 @@ function incrementCounter() {
         item-key="id"
       >
         <template #item="{ element }">
-          <NoteCard :note="element" />
+          <NoteCard :note="element" @delete-note="deleteNote" />
         </template>
       </draggable>
     </div>

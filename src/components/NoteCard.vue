@@ -25,14 +25,28 @@ function closeModal() {
 const removeTag = (note, index) => {
   note.tags.splice(index, 1);
 };
+const emit = defineEmits(["delete-note"]);
+const deleteNote = (note) => {
+  emit("delete-note", note);
+};
 </script>
+
 <template>
   <div class="note-card" @click="editCard(note)">
     <div class="drag-handle">
-      <h3>{{ note.title }}</h3>
+      <div class="top-line">
+        <h3>{{ note.title }}</h3>
+        <button @click.stop="deleteNote(note)" class="delete-note">x</button>
+      </div>
       <p>{{ note.content }}</p>
-      <div v-if="note.additionalProperties?.image">
-        <img :src="note.additionalProperties.image" />
+      <div
+        v-if="
+          note.additional_properties && note.additional_properties.image_url
+        "
+      >
+        <img
+          :src="`http://localhost:8000` + note.additional_properties.image_url"
+        />
       </div>
       <div class="tags">
         <span
@@ -45,6 +59,12 @@ const removeTag = (note, index) => {
             x
           </button>
         </span>
+        <div class="button-list">
+          <button>XX</button>
+          <button>XX</button>
+          <button>XX</button>
+          <button>XX</button>
+        </div>
       </div>
 
       <div class="modal-div">
@@ -59,6 +79,7 @@ const removeTag = (note, index) => {
     </div>
   </div>
 </template>
+
 <style scoped>
 .note-card {
   margin: 5px;
@@ -70,11 +91,35 @@ const removeTag = (note, index) => {
   break-inside: avoid;
 }
 .note-card:hover {
-  background-color: #cfcfcf;
+  box-shadow: gray 2px 2px;
+}
+.delete-note {
+  display: none;
+}
+.note-card:hover .delete-note {
+  display: block;
+}
+.button-list {
+  display: none;
+}
+.note-card:hover .button-list {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+button:hover {
+  background-color: rgb(185, 185, 185);
+  border-radius: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .drag-handle {
   margin-bottom: 5px;
   font-size: 18px;
+}
+.top-line {
+  display: flex;
+  justify-content: space-between;
 }
 .tag-button {
   background-color: #cfcfcf;
@@ -85,10 +130,14 @@ const removeTag = (note, index) => {
   font-size: medium;
 }
 .delete-tag {
+  display: none;
   border: none;
   background: none;
   color: white;
   cursor: pointer;
   font-size: 14px;
+}
+.tag-button:hover .delete-tag {
+  display: inline;
 }
 </style>

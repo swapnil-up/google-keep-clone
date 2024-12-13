@@ -13,7 +13,7 @@ const logout = () => {
 
 function resetTime() {
   clearTimeout(timeoutId);
-  timeoutId = setTimeout(logout, 1000 * 120);
+  timeoutId = setTimeout(logout, 1000 * 12000);
 }
 
 function initializeTimeout() {

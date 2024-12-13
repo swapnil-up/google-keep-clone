@@ -6,7 +6,6 @@ import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
 import { useStore } from "vuex";
 import imageSelect from "./imageSelect.vue";
-import apiClient from "../api/axios";
 
 const store = useStore();
 
