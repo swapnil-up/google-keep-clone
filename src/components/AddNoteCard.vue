@@ -6,6 +6,8 @@ import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
 import { useStore } from "vuex";
 import imageSelect from "./imageSelect.vue";
+import apiClient from "../api/axios";
+
 const store = useStore();
 
 const { notes } = defineProps({
@@ -31,22 +33,59 @@ function expand() {
   isExpanded.value = true;
 }
 
-function addNote() {
-  if (newNote.value.title.trim() != "") {
-    console.log("sending");
-    console.log(newNote.value);
-    emit("add-note", {
-      id: Date.now(),
-      content: newNote.value.content,
-      title: newNote.value.title,
-      tags: newNote.value.tags.length > 0 ? newNote.value.tags : [],
-      additionalProperties: {
-        image: newNote.value.additionalProperties.image || null,
-      },
-    });
-    reset();
-    store.commit("incrementNotesCount", 1);
+async function addNote() {
+  try {
+    if (newNote.value.title.trim() != "") {
+      const formData = new FormData();
+      formData.append("title", newNote.value.title);
+      formData.append("content", newNote.value.content);
+      formData.append("tags", []);
+      formData.append(
+        "additional_properties",
+        JSON.stringify(newNote.value.additionalProperties)
+      );
+
+      if (newNote.value.additionalProperties.imageFile) {
+        formData.append(
+          "imageFile",
+          newNote.value.additionalProperties.imageFile
+        );
+      }
+
+      const response = await apiClient.post("/notes/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+
+      // emit("add-note", {
+      //   id: Date.now(),
+      //   content: newNote.value.content,
+      //   title: newNote.value.title,
+      //   tags: newNote.value.tags.length > 0 ? newNote.value.tags : [],
+      //   additionalProperties: {
+      //     image: newNote.value.additionalProperties.image || null,
+      //   },
+      // });
+      reset();
+      store.commit("incrementNotesCount", 1);
+    }
+  } catch (error) {
+    console.error("Error creating note:", error); // Log the error response
   }
+}
+
+function dataURLtoFile(dataUrl, filename) {
+  const arr = dataUrl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
 }
 
 function reset() {
@@ -69,8 +108,8 @@ function updateTags(selectedTags) {
   newNote.value.tags = selectedTags;
 }
 
-function updateImage(imageUrl) {
-  newNote.value.additionalProperties.image = imageUrl;
+function updateImage(imageFile) {
+  newNote.value.additionalProperties.imageFile = imageFile;
 }
 
 const handleKeyup = (event) => {

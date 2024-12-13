@@ -12,8 +12,9 @@ const openFileDialog = () => {
 const handleFileChange = (event) => {
   const file = event.target.files[0];
   if (file) {
-    imageUrl.value = URL.createObjectURL(file);
-    emit("image-selected", imageUrl);
+    // emit("image-selected", file);
+    // imageUrl.value = URL.createObjectURL(file);
+    emit("image-selected", file);
   }
 };
 </script>

@@ -17,7 +17,6 @@ const login = () => {
   <h2>First you must login.</h2>
   <button @click="login">login</button>
   <jokePuller />
-  <axios/>
 </template>
 
 <style scoped>
