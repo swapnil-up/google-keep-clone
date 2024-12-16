@@ -3,7 +3,7 @@ import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import jokePuller from "@/components/jokePuller.vue";
-import axios from "@/components/axios.vue";
+
 const store = useStore();
 const router = useRouter();
 
@@ -15,14 +15,11 @@ const login = () => {
 
 <template>
   <h2>First you must login.</h2>
-  <button @click="login">login</button>
+  <button
+    class="border border-gray-500 m-1 max-w-xl hover:bg-gray-300 hover:text-black-200 hover:shadow-sm transition duration-400"
+    @click="login"
+  >
+    login
+  </button>
   <jokePuller />
 </template>
-
-<style scoped>
-button {
-  border: 1px solid gray;
-  margin: 5px;
-  max-width: 500px;
-}
-</style>

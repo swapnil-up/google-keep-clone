@@ -125,18 +125,24 @@ fetchWithRetry(url, retries);
 </script>
 
 <template>
-  <div class="create-post">
+  <div
+    class="border border-gray-600 my-1 p-3 flex flex-col gap-1 max-w-xl rounded-xl"
+  >
     <h3>Create a post!</h3>
-    <input v-model="newPost.title" placeholder="title" />
-    <input v-model="newPost.body" placeholder="content" />
+    <input v-model="newPost.title" placeholder=" title" />
+    <input v-model="newPost.body" placeholder=" content" />
     <button @click="createPost">Create Post</button>
   </div>
 
   <button @click="getPost">Get posts</button>
 
   <div v-if="posts.length">
-    <div class="post-area">
-      <li v-for="post in reversedPosts" :key="post.id" class="post-item">
+    <div class="flex flex-row flex-wrap">
+      <li
+        class="list-none border border-gray-700 m-4 p-4 w-max-[25ch] overflow-scroll rounded-lg"
+        v-for="post in reversedPosts"
+        :key="post.id"
+      >
         <template v-if="post.isEditing">
           <textarea v-model="post.title"></textarea>
           <textarea
@@ -159,38 +165,9 @@ fetchWithRetry(url, retries);
 </template>
 <style scoped>
 button {
-  border: 1px solid gray;
-  margin: 5px;
-  max-width: 500px;
+  @apply border border-gray-400 m-3 max-w-xl;
 }
 input {
-  border: 1px solid gray;
-  margin: 5px;
-}
-.create-post {
-  border: 1px solid gray;
-  border-radius: 10px;
-  margin: 15px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 500px;
-}
-.post-area {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-li {
-  list-style-type: none;
-}
-.post-item {
-  border: 1px solid gray;
-  border-radius: 10px;
-  margin: 15px;
-  padding: 15px;
-  width: 25ch;
-  overflow: scroll;
+  @apply border border-gray-400 m-1;
 }
 </style>

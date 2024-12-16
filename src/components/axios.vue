@@ -141,7 +141,7 @@ async function fetchViaParams() {
         name: "Clementine Bauch",
         // username: "Samantha",
         // website: "ramiro.info",
-        //  this doesn't work because key value pair ma kaam 
+        //  this doesn't work because key value pair ma kaam
         // garxam, not nested objects:
         // company: {
         //   name: "Romaguera-Jacobson",
@@ -163,9 +163,9 @@ fetchViaParams();
   <h3>Fetch pages with limit</h3>
   <input placeholder="enter page number" v-model="page" />
   <input placeholder="enter limit" v-model="limit" />
-  <button @click="fetchUserP">get the limited data?</button>
+  <button class="btn" @click="fetchUserP">get the limited data?</button>
   <div v-if="users.length > 0">
-    <li v-for="user in users" :key="user.id" class="multi-user">
+    <li v-for="user in users" :key="user.id" class="border border-gray-400 m-3">
       <p>Name: {{ user.name }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Website: {{ user.website }}</p>
@@ -175,7 +175,7 @@ fetchViaParams();
 
   <h3>Fetch multiple users</h3>
   <input v-model="userIds" placeholder="enter comma separated value" />
-  <button @click="fetchUsers">get the users?</button>
+  <button class="btn" @click="fetchUsers">get the users?</button>
 
   <div v-if="users.length > 0">
     <li v-for="user in users" :key="user.id" class="multi-user">
@@ -188,20 +188,20 @@ fetchViaParams();
 
   <h3>Get a user</h3>
   <input placeholder="enter a user id" v-model.number="userId" type="number" />
-  <div class="buttons">
-    <button @click="fetchUser">load the user</button>
-    <button @click="deleteUser">delete the user</button>
+  <div class="flex">
+    <button class="btn" @click="fetchUser">load the user</button>
+    <button class="btn" @click="deleteUser">delete the user</button>
   </div>
 
   <div v-if="loading">Loading</div>
   <div v-else-if="error">{{ error }}</div>
-  <div v-else-if="user && !isEdit" class="user-details">
+  <div v-else-if="user && !isEdit" class="flex flex-col">
     <p>Name: {{ user.name }}</p>
     <p>Email: {{ user.email }}</p>
     <p>Website: {{ user.website }}</p>
     <p>Phone: {{ user.phone }}</p>
 
-    <button @click="toggleEdit">edit the user</button>
+    <button class="btn" @click="toggleEdit">edit the user</button>
   </div>
 
   <div v-else-if="user && isEdit">
@@ -211,44 +211,35 @@ fetchViaParams();
       <input v-model="user.email" placeholder="Email" required />
       <input v-model="user.phone" placeholder="Phone" required />
       <input v-model="user.website" placeholder="Website" required />
-      <button @click="toggleEdit" type="submit">Update User</button>
-      <button @click="toggleEdit">Cancel</button>
+      <button class="btn" @click="toggleEdit" type="submit">Update User</button>
+      <button class="btn" @click="toggleEdit">Cancel</button>
     </form>
   </div>
 
   <div class="create-user">
     <h3>Add User</h3>
-    <form @submit.prevent="createUser">
+    <form @submit.prevent="createUser" class="flex flex-col">
       <input v-model="newUser.name" placeholder="Name" required />
       <input v-model="newUser.email" placeholder="Email" required />
       <input v-model="newUser.phone" placeholder="Phone" required />
       <input v-model="newUser.website" placeholder="Website" required />
-      <button type="submit">Add User</button>
+      <button class="btn" type="submit">Add User</button>
     </form>
   </div>
 </template>
 
 <style scoped>
-button {
-  border: 1px solid gray;
-  margin: 5px;
-  max-width: 500px;
+.btn {
+  @apply border border-gray-500 rounded-md m-1 hover:bg-gray-200;
 }
 
-.user-details {
-  display: flex;
-  flex-direction: column;
+input {
+  @apply border border-gray-200 m-1;
+  outline: none;
 }
 
 input:invalid {
-  border: 1px solid red;
-}
-.buttons {
-  display: flex;
-  flex-direction: row;
-}
-.multi-user {
-  border: 1px solid gray;
-  margin: 5px;
+  @apply border-red-400 m-1;
+  outline: none;
 }
 </style>

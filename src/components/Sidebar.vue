@@ -8,6 +8,7 @@ import archive from "vue-material-design-icons/ArchiveArrowDownOutline.vue";
 import bin from "vue-material-design-icons/TrashCanOutline.vue";
 import about from "vue-material-design-icons/InformationOutline.vue";
 import tagList from "./tagList.vue";
+import { useSidebar } from "@/composables/useSidebar.js";
 
 const props = defineProps({
   notes: {
@@ -17,12 +18,7 @@ const props = defineProps({
   },
 });
 
-var isToggled = ref(false);
-
-function toggleMenu() {
-  isToggled.value = !isToggled.value;
-}
-
+const { isToggled } = useSidebar();
 const handleKeyup = (event) => {
   if (event.key === "Escape") {
     isToggled.value = false;
@@ -36,15 +32,14 @@ onMounted(() => {
 
 <template>
   <div
-    :class="{ 'sidebar-expanded': isToggled, 'sidebar-collapsed': !isToggled }"
-    class="sidebar"
+    :class="[
+      'h-screen bg-white text-gray-500 top-0 left-0 transition-all duration-300',
+      isToggled ? 'w-52' : 'w-16',
+    ]"
     @keyup.esc="isToggled = false"
   >
-    <button class="menu-button" @click="toggleMenu">
-      <MenuIcon class="menu-icon" />
-    </button>
-    <div v-if="isToggled" class="sidebar-items-container">
-      <ul class="sidebar-items">
+    <div v-if="isToggled" class="p-4 max-w-48">
+      <ul>
         <li class="sidebar-item">
           <notesIcon /> <router-link to="/">Notes</router-link>
         </li>
@@ -62,83 +57,15 @@ onMounted(() => {
           <about /> <router-link to="/about">About</router-link>
         </li>
       </ul>
-      <div class="tag-lists"><tagList :notes="notes" /></div>
+      <div class="mt-8 list-none text-gray-500 text-lg">
+        <tagList :notes="notes" />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.sidebar {
-  width: 60px;
-  height: 100vh;
-  background-color: rgb(255, 255, 255);
-  color: white;
-  transition: width 0.2s ease-in-out;
-  left: 0;
-  top: 0;
-}
-
-.sidebar-expanded {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin-top: 1%;
-  margin-left: 1%;
-  z-index: 5;
-}
-
-.sidebar-collapsed {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1%;
-}
-
-.menu-button {
-  background: none;
-  border: none;
-  color: rgb(0, 0, 0);
-  padding: 16px;
-  cursor: pointer;
-}
-
-.menu-icon {
-  fill: black;
-  width: 24px;
-  height: 24px;
-  left: 0;
-  align-items: center;
-}
-
-.tag-lists {
-  list-style-type: none;
-  font-size: larger;
-}
-.sidebar-items-container {
-  padding: 16px;
-  color: black;
-  overflow: scroll;
-  max-width: 200px;
-}
-
-.sidebar-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .sidebar-item {
-  margin: 8px 0;
-  padding: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  color: black;
-  display: flex;
-  align-content: space-around;
-}
-
-.sidebar-item:hover {
-  background-color: #adadad;
+  @apply mt-2 p-2 rounded cursor-pointer transition-all delay-300 flex content-around hover:bg-gray-300;
 }
 </style>

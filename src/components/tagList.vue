@@ -27,38 +27,17 @@ function updateFilteredTags(newTags) {
 
 <template>
   <div>
-    <searchbar :items="uniqueTags" @update:filtered="updateFilteredTags" />
-    <li v-for="(tag, index) in filteredTags" :key="index">
+    <searchbar
+      class="focus:ring-blue-400"
+      :items="uniqueTags"
+      @update:filtered="updateFilteredTags"
+    />
+    <li
+      class="py-1 mt-0.5 px-2 bg-white mb-3 text-sm text-gray-400 cursor-pointer transition delay-100 ease-in-out rounded hover:bg-gray-500 hover:text-white"
+      v-for="(tag, index) in filteredTags"
+      :key="index"
+    >
       {{ tag }}
     </li>
   </div>
 </template>
-
-<style scoped>
-searchbar:focus {
-  border-color: #adadad;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-li {
-  padding: 8px 12px;
-  background-color: white;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-li:hover {
-  background-color: #adadad;
-  color: white;
-}
-</style>

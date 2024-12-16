@@ -57,21 +57,11 @@ async function addNote() {
         },
       });
       console.log(response.data);
-
-      // emit("add-note", {
-      //   id: Date.now(),
-      //   content: newNote.value.content,
-      //   title: newNote.value.title,
-      //   tags: newNote.value.tags.length > 0 ? newNote.value.tags : [],
-      //   additionalProperties: {
-      //     image: newNote.value.additionalProperties.image || null,
-      //   },
-      // });
       reset();
       store.commit("incrementNotesCount", 1);
     }
   } catch (error) {
-    console.error("Error creating note:", error); // Log the error response
+    console.error("Error creating note:", error); 
   }
 }
 

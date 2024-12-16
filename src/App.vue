@@ -37,15 +37,17 @@ const deleteNote = async (noteToDelete) => {
 
 <template>
   <div class="app">
-    <Sidebar class="sidebar" :notes="notes" />
+    <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
     <div class="main-content-area">
-      <NavBar :notes="notes" @update:filteredNotes="updateFilteredNotes" />
-      <RouterView
-        :filteredNotes="filteredNotes"
-        :notes="notes"
-        @update-notes="updateFilteredNotes"
-        @delete-note="deleteNote"
-      />
+      <Sidebar class="sidebar" :notes="notes" />
+      <div class="flex flex-col">
+        <RouterView
+          :filteredNotes="filteredNotes"
+          :notes="notes"
+          @update-notes="updateFilteredNotes"
+          @delete-note="deleteNote"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -57,15 +59,14 @@ body {
 }
 .app {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .sidebar {
   position: sticky;
-  z-index: 10;
 }
 .main-content-area {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 </style>

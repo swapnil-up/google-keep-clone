@@ -51,91 +51,41 @@ onMounted(() => {
 
 <template>
   <div id="modal-unique" @keyup.esc="closeModal">
-    <div v-if="isOpen" class="modal-overlay">
-      <div class="modal-content">
-        <h1>Edit Note</h1>
-        <input v-model="note.title" @keyup.esc="closeModal" />
+    <div
+      v-if="isOpen"
+      class="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-75"
+    >
+      <div
+        class="bg-white p-4 rounded-3xl m-4 max-w-xl w-full text-center flex flex-col gap-1"
+      >
+        <h1 class="text-2xl mb-3 text-center">Edit Note</h1>
+        <input
+          class="w-full p-2 border border-gray-400 text-base mb-3 transition-colors duration-1000 ease-in-out focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400"
+          v-model="note.title"
+          @keyup.esc="closeModal"
+        />
         <br />
-        <input v-model="note.content" @keyup.esc="closeModal" />
+        <input
+          class="w-full p-2 border border-gray-400 text-base mb-3 transition-colors duration-1000 ease-in-out focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400"
+          v-model="note.content"
+          @keyup.esc="closeModal"
+        />
         <br />
-        <div class="buttons-row">
-          <button @click.stop="saveModal(note)">Save</button>
-          <button @click.stop="closeModal">Close</button>
+        <div class="flex flex-row justify-around gap-2">
+          <button
+            class="bg-cyan-600 text-white text-lg py-1 px-5 rounded-lg cursor-pointer transition-colors duration-500 ease-in hover:bg-cyan-900"
+            @click.stop="saveModal(note)"
+          >
+            Save
+          </button>
+          <button
+            class="bg-cyan-600 text-white text-lg py-1 px-5 rounded-lg cursor-pointer transition-colors duration-500 ease-in hover:bg-cyan-900"
+            @click.stop="closeModal"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  color: #333;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.modal-content h1 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-bottom: 15px;
-  transition: border-color 0.3s ease-in-out;
-}
-
-.modal-content input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.modal-content button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  align-self: flex-end;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.modal-content button:hover {
-  background-color: #0056b3;
-}
-.buttons-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  gap: 10px;
-}
-</style>

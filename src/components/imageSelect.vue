@@ -13,14 +13,19 @@ const handleFileChange = (event) => {
   const file = event.target.files[0];
   if (file) {
     // emit("image-selected", file);
-    // imageUrl.value = URL.createObjectURL(file);
+    imageUrl.value = URL.createObjectURL(file);
     emit("image-selected", file);
   }
 };
 </script>
 
 <template>
-  <button @click="openFileDialog">Choose image</button>
+  <button
+    class="border border-gray-300 rounded-lg w-10/12 hover:bg-gray-300 transition-colors duration-300"
+    @click="openFileDialog"
+  >
+    Choose image
+  </button>
   <input
     type="file"
     ref="fileInput"
@@ -29,16 +34,7 @@ const handleFileChange = (event) => {
     @change="handleFileChange"
   />
   <div v-if="imageUrl">
-    <h2>image is:</h2>
-    <img :src="imageUrl" />
+    <h2 class="mt-2">Selected image is:</h2>
+    <img class="w-52 h-52 mt-2" :src="imageUrl" />
   </div>
 </template>
-<style scoped>
-button {
-  border-radius: 15px;
-}
-img {
-  width: 200px;
-  height: 200px;
-}
-</style>

@@ -36,43 +36,20 @@ watch(filteredList, (newList) => emit("update:filtered", newList));
 </script>
 
 <template>
-  <div class="search-area">
-    <button><searchIcon class="search-icon" /></button>
+  <div class="flex border border-gray-300 rounded bg-white w-full">
+    <button>
+      <searchIcon class="text-gray-300 mx-3 flex items-center justify-center" />
+    </button>
     <input
       type="text"
-      class="search-bar"
+      class="outline-none bg-transparent flex-grow w-full"
       placeholder="Search"
       v-model="input"
     />
-    <div class="searchbar-area" v-if="input">
-      <div class="error" v-if="filteredList === 0">
+    <div v-if="input">
+      <div v-if="filteredList === 0">
         <p>No results found</p>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.search-area {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid gray;
-  border-radius: 5px;
-  background-color: rgb(229, 229, 229);
-  width: 100%;
-}
-.search-icon {
-  color: gray;
-  margin-right: 10px;
-  margin-left: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.search-bar {
-  border: 0px;
-  outline: none;
-  background: transparent;
-  flex-grow: 1;
-}
-</style>
