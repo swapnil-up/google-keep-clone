@@ -4,7 +4,6 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import jokePuller from "@/components/jokePuller.vue";
 import apiClient from "../api/axios";
-import axios from "axios";
 
 const store = useStore();
 const router = useRouter();
@@ -50,4 +49,5 @@ const loginApi = async () => {
       <button type="submit">Login</button>
     </form>
   </div>
+  <router-link to="/register"><p>Haven't registered yet?</p></router-link>
 </template>

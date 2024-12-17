@@ -6,6 +6,7 @@ import Reminder from "./views/RemindersPage.vue";
 import Login from "./views/LogInPage.vue";
 import NotFound from "./views/NotFoundPage.vue";
 import store from "./stores";
+import RegisterPage from "./views/RegisterPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,11 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login,
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: RegisterPage,
     },
     {
       path: "/about",
@@ -47,7 +53,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name != "login" && !store.state.isLoggedIn) {
+  if (to.name != "login" && to.name !== "register" && !store.state.isLoggedIn) {
     next({ name: "login" });
   } else {
     next();
