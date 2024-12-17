@@ -7,6 +7,7 @@ import grid from "vue-material-design-icons/DotsGrid.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { useSidebar } from "@/composables/useSidebar.js";
+import apiClient from "../api/axios.js";
 
 const store = useStore();
 const router = useRouter();
@@ -26,9 +27,16 @@ function updateFilteredNotes(newNotes) {
   emit("update:filteredNotes", newNotes);
 }
 
-const logout = () => {
-  store.commit("logout");
-  router.push({ name: "login" });
+const logout = async () => {
+  try {
+    const response = await apiClient.post("/logout");
+    if (response.data.message === "Logout successful") {
+      store.commit("logout");
+      router.push({ name: "login" });
+    }
+  } catch (error) {
+    console.log(error.response?.data?.message || error.message);
+  }
 };
 </script>
 

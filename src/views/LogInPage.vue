@@ -3,6 +3,8 @@ import { onMounted, ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import jokePuller from "@/components/jokePuller.vue";
+import apiClient from "../api/axios";
+import axios from "axios";
 
 const store = useStore();
 const router = useRouter();
@@ -10,6 +12,23 @@ const router = useRouter();
 const login = () => {
   store.commit("login");
   router.push({ name: "home" });
+};
+
+const email = ref("");
+const password = ref("");
+const loginApi = async () => {
+  try {
+    const response = await apiClient.post("/login", {
+      email: email.value,
+      password: password.value,
+    });
+    if (response.data.message === "Login successful") {
+      store.commit("login");
+      router.push({ name: "home" });
+    }
+  } catch (error) {
+    console.log(error.response?.data?.message || error.message);
+  }
 };
 </script>
 
@@ -22,4 +41,13 @@ const login = () => {
     login
   </button>
   <jokePuller />
+  <div>
+    <form @submit.prevent="loginApi" class="flex flex-col">
+      <label for="email">email</label>
+      <input placeholder="enter email" v-model="email" required />
+      <label for="password">password</label>
+      <input placeholder="enter password" v-model="password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
 </template>

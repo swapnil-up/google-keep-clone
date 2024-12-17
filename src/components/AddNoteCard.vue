@@ -6,6 +6,7 @@ import labels from "vue-material-design-icons/LabelOutline.vue";
 import tagList from "./tagList.vue";
 import { useStore } from "vuex";
 import imageSelect from "./imageSelect.vue";
+import apiClient from "../api/axios.js";
 
 const store = useStore();
 
@@ -61,21 +62,10 @@ async function addNote() {
       store.commit("incrementNotesCount", 1);
     }
   } catch (error) {
-    console.error("Error creating note:", error); 
+    console.error("Error creating note:", error);
   }
 }
 
-function dataURLtoFile(dataUrl, filename) {
-  const arr = dataUrl.split(","),
-    mime = arr[0].match(/:(.*?);/)[1],
-    bstr = atob(arr[1]),
-    n = bstr.length,
-    u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new File([u8arr], filename, { type: mime });
-}
 
 function reset() {
   newNote.value = {

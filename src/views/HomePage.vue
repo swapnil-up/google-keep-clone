@@ -34,9 +34,7 @@ var counter = ref(isNaN(parseInt(storedCounter)) ? 0 : parseInt(storedCounter));
 
 function incrementCounter() {
   counter.value++;
-  console.log(counter.value);
   localStorage.setItem("counter", counter.value);
-  console.log(localStorage.setItem("counter", counter.value));
 }
 
 const deleteNote = (note) => {
