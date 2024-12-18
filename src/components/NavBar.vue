@@ -28,14 +28,19 @@ function updateFilteredNotes(newNotes) {
 }
 
 const logout = async () => {
-  try {
-    const response = await apiClient.post("/logout");
-    if (response.data.message === "Logout successful") {
-      store.commit("logout");
-      router.push({ name: "login" });
+  const token = localStorage.getItem("api_token");
+  if (token) {
+    try {
+      const response = await apiClient.post("/logout");
+      console.log("Logout sent:", localStorage.getItem("api_token"));
+      if (response.data.message === "Logout successful") {
+        localStorage.removeItem("api_token");
+        store.commit("logout");
+        router.push({ name: "login" });
+      }
+    } catch (error) {
+      console.log(error.response?.data?.message || error.message);
     }
-  } catch (error) {
-    console.log(error.response?.data?.message || error.message);
   }
 };
 </script>

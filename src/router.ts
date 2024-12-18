@@ -7,6 +7,7 @@ import Login from "./views/LogInPage.vue";
 import NotFound from "./views/NotFoundPage.vue";
 import store from "./stores";
 import RegisterPage from "./views/RegisterPage.vue";
+import apiClient from "./api/axios.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,7 +53,20 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem("api_token");
+  if (token) {
+    try {
+      const response = await apiClient.get(`/user`);
+      localStorage.setItem("set-user", response.data);
+      store.commit("login");
+      next();
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem("api_token");
+      next({ name: "login" });
+    }
+  }
   if (to.name != "login" && to.name !== "register" && !store.state.isLoggedIn) {
     next({ name: "login" });
   } else {

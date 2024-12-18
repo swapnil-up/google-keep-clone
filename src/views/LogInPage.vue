@@ -8,11 +8,6 @@ import apiClient from "../api/axios";
 const store = useStore();
 const router = useRouter();
 
-const login = () => {
-  store.commit("login");
-  router.push({ name: "home" });
-};
-
 const email = ref("");
 const password = ref("");
 const loginApi = async () => {
@@ -22,6 +17,8 @@ const loginApi = async () => {
       password: password.value,
     });
     if (response.data.message === "Login successful") {
+      localStorage.setItem("api_token", response.data.token);
+      console.log("Token saved:", localStorage.getItem("api_token"));
       store.commit("login");
       router.push({ name: "home" });
     }
@@ -33,13 +30,7 @@ const loginApi = async () => {
 
 <template>
   <h2>First you must login.</h2>
-  <button
-    class="border border-gray-500 m-1 max-w-xl hover:bg-gray-300 hover:text-black-200 hover:shadow-sm transition duration-400"
-    @click="login"
-  >
-    login
-  </button>
-  <jokePuller />
+
   <div>
     <form @submit.prevent="loginApi" class="flex flex-col">
       <label for="email">email</label>
@@ -50,4 +41,5 @@ const loginApi = async () => {
     </form>
   </div>
   <router-link to="/register"><p>Haven't registered yet?</p></router-link>
+  <jokePuller />
 </template>
